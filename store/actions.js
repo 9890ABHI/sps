@@ -1,67 +1,127 @@
+import axios from 'axios';
 
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
-// Action Types
-export const LOGIN_REQUEST = "LOGIN_REQUEST";
-export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-export const LOGIN_FAILURE = "LOGIN_FAILURE";
+export const LOGOUT = 'LOGOUT';
 
-export const LOGOUT = "LOGOUT";
+export const SIGNUP_REQUEST = 'SIGNUP_REQUEST';
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
+export const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
 
-export const SIGNUP_REQUEST = "SIGNUP_REQUEST";
-export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
-export const SIGNUP_FAILURE = "SIGNUP_FAILURE";
+export const TEACHER_LOGIN_REQUEST = 'TEACHER_LOGIN_REQUEST';
+export const TEACHER_LOGIN_SUCCESS = 'TEACHER_LOGIN_SUCCESS';
+export const TEACHER_LOGIN_FAILURE = 'TEACHER_LOGIN_FAILURE';
 
+export const teacherLoginRequest = () => ({
+  type: TEACHER_LOGIN_REQUEST,
+});
 
+export const teacherLoginSuccess = teacherData => ({
+  type: TEACHER_LOGIN_SUCCESS,
+  payload: teacherData,
+});
 
+export const teacherLoginFailure = error => ({
+  type: TEACHER_LOGIN_FAILURE,
+  payload: error,
+});
 
-// Action Creators
-export const loginRequest = () => ({ type: LOGIN_REQUEST });
-export const loginSuccess = (user) => ({ type: LOGIN_SUCCESS, user });
-export const loginFailure = (error) => ({ type: LOGIN_FAILURE, error });
+export const loginRequest = () => ({type: LOGIN_REQUEST});
+export const loginSuccess = user => ({type: LOGIN_SUCCESS, payload: user});
+export const loginFailure = error => ({type: LOGIN_FAILURE, error});
 
-export const logout = () => ({ type: LOGOUT });
+export const logout = () => ({type: LOGOUT});
 
-export const signupRequest = () => ({ type: SIGNUP_REQUEST });
-export const signupSuccess = (user) => ({ type: SIGNUP_SUCCESS, user });
-export const signupFailure = (error) => ({ type: SIGNUP_FAILURE, error });
+export const signupRequest = () => ({type: SIGNUP_REQUEST});
+export const signupSuccess = user => ({type: SIGNUP_SUCCESS, user});
+export const signupFailure = error => ({type: SIGNUP_FAILURE, error});
 
+import {NetworkInfo} from 'react-native-network-info';
 
+// Get Local IP
+// NetworkInfo.getIPAddress();
+const ips = NetworkInfo.getIPAddress().then(ipAddress => {
+  console.log('ipAddress', ipAddress);
+});
 
-
-export const login = (credentials) => async (dispatch) => {
+const getIPAddress = async () => {
   try {
-    dispatch(loginRequest());
-    // Make API request for login here
-    // Once successful, dispatch loginSuccess(user)
-    dispatch(loginSuccess(credentials));
-    // If there's an error, dispatch loginFailure(error)
+    const ipAddress = await NetworkInfo.getIPAddress();
+    console.log('ipAddress', ipAddress);
+    return ipAddress;
+  } catch (error) {
+    console.error('Error getting IP address:', error);
+    return null;
+  }
+};
+
+const ipAddress = getIPAddress();
+console.log('ipAddress', ipAddress);
+// Usage
+const fetchIP = async () => {
+  const ipAddress = await getIPAddress();
+  console.log('Returned IP address:', ipAddress);
+  return ipAddress;
+  // Now you can use ipAddress in your application
+};
+
+const ip = fetchIP();
+console.log('ip', ip);
+// export const BASEURL = 'http://192.168.0.197:3001/';
+export const BASEURL = 'http://192.168.43.13:3001/';
+// export const BASEURL = `http://${}:3001/`;
+console.log('BASEURL', BASEURL);
+export const login = credentials => async dispatch => {
+  try {
+    // dispatch(loginRequest());
+    await axios
+      .post(BASEURL + 'login', credentials)
+      .then(async res => {
+        console.log(res.data);
+        console.log('credentials', credentials);
+        dispatch(loginSuccess(res.data.data));
+      })
+      .catch(error => console.log(error));
+
+    // try {
+    //   const response = axios.get(BASEURL + `api/student/${credentials.email}`);
+    //   console.log('data', response.data);
+    //   // dispatch(loginSuccess(response.data));
+    // } catch (error) {
+    //   console.error('Error fetching course:', error);
+    // }
   } catch (error) {
     dispatch(loginFailure(error));
   }
 };
+export const teacherlogin = credentials => async dispatch => {
+  try {
+    // dispatch(loginRequest());
+    dispatch(teacherLoginRequest());
+    await axios
+      .post(BASEURL + 'loginteacher', credentials)
+      .then(res => {
+        console.log('res', res.data.data);
+        // TeacherDetails(credentials.email)
+        dispatch(teacherLoginSuccess(res.data.data));
+      })
+      .catch(error => console.log(error));
+  } catch (error) {
+    dispatch(teacherLoginFailure(error));
+  }
+};
 
-
-
-export const logoutUser = () => (dispatch) => {
-  // You can perform any cleanup or API requests here
-
-  // Dispatch the logout action to update the user's state
+export const logoutUser = () => dispatch => {
   dispatch(logout());
 };
 
-// Thunk for signing up
-export const signup = (userData) => async (dispatch) => {
+export const signup = userData => async dispatch => {
   try {
     dispatch(signupRequest());
-    // Make API request for signup here
-    // Once successful, dispatch signupSuccess(user)
     dispatch(signupSuccess(userData));
-    // If there's an error, dispatch signupFailure(error)
   } catch (error) {
     dispatch(signupFailure(error));
   }
 };
-
-
-
-

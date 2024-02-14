@@ -3,35 +3,43 @@ import React, { useState } from 'react'
 import { COLORS } from '../../Assets/Theme';
 import axios from 'axios';
 
-const SignUp = ({ navigation }) => {
+const TeacherRegister = ({ navigation }) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [mobile, setMobile] = useState('');
     const [password, setPassword] = useState('');
+    const [code, setCode] = useState('');
     
 
       const handleRegister = () => {
-        const userData = { name: name, email, mobile, password };
-        axios.post('http://192.168.0.197:3001/register', userData 
+        if (name === "" || email === '' || mobile === "" || password===''){
+            Alert.alert('values are mepty')
+            
+            // navigation.navigate("TeacherLogin")
+        }else{
+
+            const userData = { name: name, email, mobile, password, code };
+            axios.post('http://192.168.0.197:3001/registerteacher', userData 
         // , {
-        //     headers: {
+            //     headers: {
         //         'Content-Type': 'application/json'
         //     }
         // }
         )
         .then((res) => {console.log(res.data)
-        if (res.data.status === 'ok'){
-            Alert.alert('Registration Succesfull')
-            navigation.navigate("Login")
-        }else{
-            Alert.alert(JSON.stringify(res.data))
-        }
+            if (res.data.status === 'ok'){
+                Alert.alert('Registration Succesfull')
+                navigation.navigate("TeacherLogin")
+            }else{
+                Alert.alert(JSON.stringify(res.data))
+            }
         })
         .catch(e => console.log(e))
         // Perform user registration logic here using userData state
         console.log('User data:', userData);
         // Add your registration logic here (e.g., API calls, validation, etc.)
-      };
+    }
+    };
   return (
     <View style={{
         display:'flex',
@@ -65,7 +73,7 @@ const SignUp = ({ navigation }) => {
                 fontSize:25,
                 paddingVertical:20
                 ,fontWeight:700
-            }}>SIGNUP</Text>
+            }}>Teacher Register</Text>
         </View>
         <View style={{
             width:"100%",
@@ -129,6 +137,22 @@ const SignUp = ({ navigation }) => {
                 color:'#000',
                 paddingTop:10
             }}>
+                Code
+            </Text>
+                  <TextInput
+        style={{ borderColor: "gray",
+        width: "100%",
+        borderWidth: 1,
+        borderRadius: 10,
+        padding: 10,}}
+        placeholder='****'
+        onChangeText={(text) => setCode(text)}
+        value={code}
+      />
+       <Text style={{
+                color:'#000',
+                paddingTop:10
+            }}>
                 Password
             </Text>
                   <TextInput
@@ -166,13 +190,13 @@ const SignUp = ({ navigation }) => {
                     paddingBottom:10
                 }}>
                     <Text>
-                        Have Account
+                        Have Teacher Account
                     </Text>
                         <Text style={{
                             color:'blue',
                             
                         }}
-                        onPress={() => navigation.navigate('Login')}
+                        onPress={() => navigation.navigate('TeacherLogin')}
                         >
                          Login
                         </Text>
@@ -183,4 +207,4 @@ const SignUp = ({ navigation }) => {
   )
 }
 
-export default SignUp
+export default TeacherRegister

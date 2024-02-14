@@ -5,9 +5,7 @@
  * @format
  */
 
-// import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
-// import type {PropsWithChildren} from 'react';
 import {
   StyleSheet,
 } from 'react-native';
@@ -15,28 +13,17 @@ import {
 import Index from './src/Screens/Index';
 
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-// import Login from './src/Screens/auth/Login';
-
-
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 const App =() => {
 
-  
   return (<>
-
-      <NavigationContainer>
-    {/* <SafeAreaView>
-      <StatusBar
-        // barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        // backgroundColor={backgroundStyle.backgroundColor}
-        /> */}
-
-       
+  <Provider store={store}>
+      <NavigationContainer> 
       <Index />
-       
-    {/* </SafeAreaView> */}
-        </NavigationContainer>
+      </NavigationContainer>
+  </Provider>
             </>
   );
 

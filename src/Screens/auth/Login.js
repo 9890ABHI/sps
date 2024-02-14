@@ -1,7 +1,38 @@
-import { StyleSheet, Text, View , Image , TextInput, Button } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View , Image , TextInput, Button, Alert } from 'react-native'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { login, logout } from '../../../store/actions'
 
 const Login = ({ navigation }) => {
+    const dispatch = useDispatch()
+    const user = useSelector(state => state.auth.user)
+    // console.log('==== User Auth === null or not ====');
+    // console.log(user);
+    // console.log('====================================');
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+      });
+    
+      const handleInputChange = (name, value) => {
+        setFormData({
+          ...formData,
+          [name]: value,
+        });
+      };
+    
+      const handleLogin = () => {
+        console.log('====================================');
+        console.log(formData);
+        console.log('====================================');
+        dispatch(login(formData));
+        // if ( user !== null ) {
+            navigation.navigate('Home')
+        // }else{
+        //     Alert.alert('login error')
+        //     dispatch(logout())
+        // }
+      };
   return (
    <>
    <View style={{
@@ -60,6 +91,8 @@ const Login = ({ navigation }) => {
         padding: 10, }}
         placeholder='abc@mail.com'
         editable
+        onChangeText={(text) => handleInputChange('email', text)}
+        value={formData.email}
       />
        <Text style={{
                 color:'#000',
@@ -74,6 +107,9 @@ const Login = ({ navigation }) => {
         borderRadius: 10,
         padding: 10,}}
         placeholder='*******'
+        secureTextEntry
+        onChangeText={(text) => handleInputChange('password', text)}
+        value={formData.password}
       />
         </View>
         <View style={{
@@ -101,6 +137,25 @@ const Login = ({ navigation }) => {
                      Create One
                     </Text>
             </View>
+            <View style={{
+                display:'flex',
+                flexDirection:'row',
+                gap:10,
+                paddingBottom:10
+            }}>
+                <Text>
+                    Teacher Login
+                </Text>
+                    <Text style={{
+                        color:'blue',
+                        
+                    }}
+                    onPress={() => navigation.navigate('TeacherLogin')}
+                    >
+
+                     Login
+                    </Text>
+            </View>
             {/* submit */}
             <View style={{
                 width:"55%",
@@ -108,7 +163,7 @@ const Login = ({ navigation }) => {
                 overflow:'hidden'
             }}>
 
-            <Button  title={'Login'} color={'#c90f90'} onPress={() => navigation.navigate('Home')} />
+            <Button  title={'Login'} color={'#c90f90'} onPress={handleLogin}  />
             </View>
         </View>
     </View>
