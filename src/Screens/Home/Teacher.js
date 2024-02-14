@@ -7,6 +7,4 @@ const Teacher = () => {
       <Text>Teacher</Text>
     </View>
   )
-}
-
-export default Teacher
+          <View style={{
