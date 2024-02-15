@@ -69,7 +69,7 @@ export const authReducer = (state = initialState, action) => {
         teacher: null,
       };
 
-    case LOGOUT: // Handle the LOGOUT action
+    case LOGOUT:
       return {
         ...state,
         user: null,

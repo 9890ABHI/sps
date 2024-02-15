@@ -10,27 +10,14 @@ const Students = ({navigation}) => {
   const dispatch = useDispatch();
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
-  const user = useSelector(state => state.auth.user);
-  // useEffect(() => {
-  //   const fetchStudentDetails = async () => {
-  //     try {
-  //       const response = await axios.get(BASEURL + `api/student/${user.email}`);
-  //       console.log('Student', response.data);
-  //       setData(response.data);
-  //       setLoading(false);
-  //       dispatch(loginSuccess(response.data));
-  //     } catch (error) {
-  //       console.log('Error fetching Student details:', error.message);
-  //       setLoading(false);
-  //     }
-  //   };
-  //   fetchStudentDetails();
-  // }, []);
+  const user = useSelector(state => state.auth);
   const handleLogOut = () => {
     dispatch(logout());
     navigation.navigate('Login');
   };
-
+  // console.log('====================================');
+  // console.log(user);
+  // console.log('====================================');
   return (
     <ScrollView>
       <View
@@ -39,7 +26,7 @@ const Students = ({navigation}) => {
         }}>
         <TextHeader title={'Student Portal System'} />
       </View>
-      {loading ? (
+      {!user ? (
         <>
           <Text>loading.....</Text>
         </>
