@@ -1,18 +1,28 @@
-import {View, Text, Image, Button, TextInput, Alert} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  Button,
+  TextInput,
+  Alert,
+  TouchableOpacity,
+} from 'react-native';
 import React, {useState} from 'react';
 import {COLORS} from '../../Assets/Theme';
 import axios from 'axios';
+import {BASEURL} from '../../../store/actions';
 
 const SignUp = ({navigation}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [mobile, setMobile] = useState('');
   const [password, setPassword] = useState('');
+  const [showPass, setShowPass] = useState(true);
 
   const handleRegister = () => {
     const userData = {name: name, email, mobile, password};
     axios
-      .post('http://192.168.0.197:3001/register', userData)
+      .post(BASEURL + 'register', userData)
       .then(res => {
         console.log(res.data);
         if (res.data.status === 'ok') {
@@ -20,7 +30,7 @@ const SignUp = ({navigation}) => {
           navigation.navigate('Login');
         }
       })
-      .catch(e => Alert.alert(JSON.stringify(e.data)));
+      .catch(e => Alert.alert('Registration unsuccesfull'));
   };
   return (
     <View
@@ -87,6 +97,7 @@ const SignUp = ({navigation}) => {
               borderRadius: 10,
               padding: 10,
             }}
+            placeholderTextColor={COLORS.gray}
             placeholder="abc xyz"
             editable
             onChangeText={text => setName(text)}
@@ -107,6 +118,7 @@ const SignUp = ({navigation}) => {
               padding: 10,
             }}
             placeholder="abc@mail.com"
+            placeholderTextColor={COLORS.gray}
             editable
             onChangeText={text => setEmail(text)}
             value={email}
@@ -126,6 +138,7 @@ const SignUp = ({navigation}) => {
               padding: 10,
             }}
             placeholder="00000 00000"
+            placeholderTextColor={COLORS.gray}
             editable
             onChangeText={text => setMobile(text)}
             value={mobile}
@@ -138,18 +151,44 @@ const SignUp = ({navigation}) => {
             }}>
             Password
           </Text>
-          <TextInput
+          <View
             style={{
-              borderColor: 'gray',
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
               width: '100%',
               borderWidth: 1,
               borderRadius: 10,
-              padding: 10,
-            }}
-            placeholder="*******"
-            onChangeText={text => setPassword(text)}
-            value={password}
-          />
+              justifyContent: 'space-between',
+              paddingHorizontal: 10,
+              borderColor: 'gray',
+            }}>
+            <TextInput
+              style={{
+                paddingVertical: 10,
+              }}
+              placeholder="*******"
+              placeholderTextColor={COLORS.gray}
+              onChangeText={text => setPassword(text)}
+              value={password}
+              secureTextEntry={showPass}
+            />
+            <TouchableOpacity onPress={() => setShowPass(!showPass)}>
+              <Image
+                source={{
+                  uri: showPass
+                    ? 'https://img.icons8.com/?size=30&id=60022&format=png'
+                    : 'https://image.shutterstock.com/image-vector/closed-eye-vector-icon-web-260nw-354263150.jpg',
+                }}
+                alt=""
+                style={{
+                  width: 20,
+                  height: 20,
+                  borderRadius: 25,
+                }}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
         <View
           style={{

@@ -777,6 +777,7 @@ export const Calculator = () => {
             placeholder="Course Name"
             value={courseName}
             onChangeText={text => setCourseName(text)}
+            placeholderTextColor={COLORS.gray}
           />
           <TextInput
             style={styles.input}

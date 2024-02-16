@@ -308,5 +308,6 @@ const styles = StyleSheet.create({
     padding: 8,
     flex: 1,
     borderRadius: 10,
+    color: COLORS.black,
   },
 });

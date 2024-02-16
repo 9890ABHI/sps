@@ -23,17 +23,24 @@ import {
   Teacher,
 } from './Home/Teacher';
 import DetailsWeek from '../Components/DetailsWeek';
+import LoadingScreen from '../Components/LoadingScreen';
 
 const Index = () => {
   const Stack = createNativeStackNavigator();
   return (
     <>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="LoadingScreen" headerMode="none">
+        <Stack.Screen
+          name="LoadingScreen"
+          component={LoadingScreen}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="Login"
           component={Login}
           options={{headerShown: false}}
         />
+
         <Stack.Screen
           name="TeacherLogin"
           component={TeacherLogin}

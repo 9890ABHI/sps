@@ -6,6 +6,7 @@ import {
   TextInput,
   Button,
   Alert,
+  TouchableOpacity,
 } from 'react-native';
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
@@ -15,6 +16,7 @@ import {COLORS} from '../../Assets/Theme';
 const TeacherLogin = ({navigation}) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.auth.user);
+  const [showPass, setShowPass] = useState(true);
   // console.log('==== User Auth === null or not ====');
   // console.log(user);
   // console.log('====================================');
@@ -123,19 +125,44 @@ const TeacherLogin = ({navigation}) => {
               }}>
               Password
             </Text>
-            <TextInput
+            <View
               style={{
-                borderColor: 'gray',
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
                 width: '100%',
                 borderWidth: 1,
                 borderRadius: 10,
-                padding: 10,
-              }}
-              placeholder="*******"
-              secureTextEntry
-              onChangeText={text => handleInputChange('password', text)}
-              value={formData.password}
-            />
+                justifyContent: 'space-between',
+                paddingHorizontal: 10,
+                borderColor: 'gray',
+              }}>
+              <TextInput
+                style={{
+                  paddingVertical: 10,
+                }}
+                placeholder="*******"
+                placeholderTextColor={COLORS.gray}
+                onChangeText={text => handleInputChange('password', text)}
+                value={formData.password}
+                secureTextEntry={showPass}
+              />
+              <TouchableOpacity onPress={() => setShowPass(!showPass)}>
+                <Image
+                  source={{
+                    uri: showPass
+                      ? 'https://img.icons8.com/?size=30&id=60022&format=png'
+                      : 'https://image.shutterstock.com/image-vector/closed-eye-vector-icon-web-260nw-354263150.jpg',
+                  }}
+                  alt=""
+                  style={{
+                    width: 20,
+                    height: 20,
+                    borderRadius: 25,
+                  }}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
           <View
             style={{
