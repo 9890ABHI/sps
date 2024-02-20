@@ -69,7 +69,7 @@ const Students = ({navigation}) => {
             <TouchableOpacity
               onPress={() => navigation.navigate('Notifications')}>
               <Card
-                title="Announcements and Notifications"
+                title="Announcements"
                 img="https://img.freepik.com/free-vector/diary-concept-illustration_114360-3755.jpg?size=626&ext=jpg"
               />
             </TouchableOpacity>
@@ -85,6 +85,12 @@ const Students = ({navigation}) => {
             <TouchableOpacity onPress={() => navigation.navigate('Calculator')}>
               <Card
                 title="Calculator"
+                img="https://img.freepik.com/free-vector/diary-concept-illustration_114360-3755.jpg?size=626&ext=jpg"
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Lectures')}>
+              <Card
+                title="lectures"
                 img="https://img.freepik.com/free-vector/diary-concept-illustration_114360-3755.jpg?size=626&ext=jpg"
               />
             </TouchableOpacity>

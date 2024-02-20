@@ -1,4 +1,10 @@
-import {View, Text, TouchableOpacity, Image} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  ActivityIndicator,
+} from 'react-native';
 import React, {useEffect, useMemo, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {BASEURL} from '../../store/actions';
@@ -35,21 +41,23 @@ export const CourseStudent = ({navigation}) => {
   const course = appliedCourse;
   return (
     <>
-      {applyLoading ? (
-        <>
-          <Text>loading.....</Text>
-        </>
-      ) : (
-        <>
-          <View
-            style={{
-              paddingBottom: 30,
-              display: 'flex',
-              gap: 20,
-            }}>
-            <Text style={{...FONTS.h2, color: COLORS.black}}>
-              Courses applied
-            </Text>
+      <View
+        style={{
+          paddingBottom: 30,
+          display: 'flex',
+          gap: 20,
+        }}>
+        <Text style={{...FONTS.h2, color: COLORS.black}}>Courses applied </Text>
+        {applyLoading ? (
+          <>
+            <ActivityIndicator
+              size="large"
+              color={COLORS.green}
+              animating={applyLoading}
+            />
+          </>
+        ) : (
+          <>
             {course ? (
               <>
                 <>
@@ -169,12 +177,12 @@ export const CourseStudent = ({navigation}) => {
               </>
             ) : (
               <>
-                <Text>Their is applied course</Text>
+                <Text>Their is no applied course</Text>
               </>
             )}
-          </View>
-        </>
-      )}
+          </>
+        )}
+      </View>
     </>
   );
 };

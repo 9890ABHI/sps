@@ -9,6 +9,7 @@ import {
   Image,
   StyleSheet,
   FlatList,
+  ActivityIndicator,
 } from 'react-native';
 import React, {lazy, useEffect, useMemo, useState} from 'react';
 import axios from 'axios';
@@ -901,7 +902,11 @@ export const CourseDetails = ({route, navigation}) => {
           </View>
           {loading ? (
             <>
-              <Text>loading.....</Text>
+              <ActivityIndicator
+                size="large"
+                color={COLORS.green}
+                animating={loading}
+              />
             </>
           ) : (
             <>
@@ -1177,17 +1182,31 @@ export const CourseDetails = ({route, navigation}) => {
                     style={{
                       display: 'flex',
                       gap: 10,
-                      paddingTop: 20,
+                      paddingTop: 10,
                     }}>
-                    {course.weeks.map(item => (
+                    {course.weeks.length < 1 ? (
                       <>
-                        <Accordian
-                          user={user}
-                          item={item}
-                          navigation={navigation}
-                        />
+                        <Text
+                          style={{
+                            color: COLORS.gray,
+                            ...FONTS.body3,
+                          }}>
+                          Course Details Are Not available
+                        </Text>
                       </>
-                    ))}
+                    ) : (
+                      <>
+                        {course.weeks.map(item => (
+                          <>
+                            <Accordian
+                              user={user}
+                              item={item}
+                              navigation={navigation}
+                            />
+                          </>
+                        ))}
+                      </>
+                    )}
                   </View>
                 </View>
               </View>

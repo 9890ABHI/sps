@@ -10,6 +10,7 @@ import {
   Linking,
   StyleSheet,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 import React, {useEffect, useMemo, useState} from 'react';
 import {
@@ -194,6 +195,7 @@ export const Student = ({navigation}) => {
 export const Course = ({navigation}) => {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const fetchCourses = async () => {
       try {
@@ -235,140 +237,157 @@ export const Course = ({navigation}) => {
           />
           <CourseStudent navigation={navigation} />
 
-          {loading ? (
-            <>
-              <Text>loading.....</Text>
-            </>
-          ) : (
-            <>
-              <View
-                style={{
-                  paddingBottom: 30,
-                  display: 'flex',
-                  gap: 20,
-                }}>
-                <Text style={{...FONTS.h2, color: COLORS.black}}>
-                  Courses List : {memoizedCourses.length}
-                </Text>
-                {memoizedCourses.map(course => (
+          <>
+            <View
+              style={{
+                paddingBottom: 30,
+                display: 'flex',
+                gap: 20,
+              }}>
+              <Text style={{...FONTS.h2, color: COLORS.black}}>
+                Courses available :
+                {loading ? (
                   <>
-                    <TouchableOpacity
-                      key={course.id}
-                      onPress={() => {
-                        navigation.navigate('CourseDetails', {
-                          courseId: course._id,
-                        });
-                      }}>
-                      <View
+                    <ActivityIndicator
+                      size="small"
+                      color={COLORS.black}
+                      animating={loading}
+                    />
+                  </>
+                ) : (
+                  <> {memoizedCourses.length}</>
+                )}
+              </Text>
+              {loading ? (
+                <>
+                  <ActivityIndicator
+                    size="large"
+                    color={COLORS.green}
+                    animating={loading}
+                  />
+                </>
+              ) : (
+                <>
+                  {memoizedCourses.map(course => (
+                    <>
+                      <TouchableOpacity
                         key={course.id}
-                        style={{
-                          padding: 20,
-                          backgroundColor: COLORS.white,
-                          borderRadius: 10,
+                        onPress={() => {
+                          navigation.navigate('CourseDetails', {
+                            courseId: course._id,
+                          });
                         }}>
                         <View
+                          key={course.id}
                           style={{
-                            display: 'flex',
+                            padding: 20,
+                            backgroundColor: COLORS.white,
+                            borderRadius: 10,
                           }}>
+                          <View
+                            style={{
+                              display: 'flex',
+                            }}>
+                            <Text
+                              style={{
+                                textTransform: 'capitalize',
+                                ...FONTS.h2,
+                                color: COLORS.black,
+                              }}>
+                              Course Name : {course.courseName}
+                            </Text>
+                            <Text
+                              style={{
+                                textTransform: 'capitalize',
+                                ...FONTS.h3,
+                                color: COLORS.black,
+                              }}>
+                              Duration: {course.duration} month
+                            </Text>
+                          </View>
                           <Text
                             style={{
-                              textTransform: 'capitalize',
-                              ...FONTS.h2,
-                              color: COLORS.black,
+                              paddingVertical: 10,
+                              ...FONTS.body3,
+                              color: COLORS.darkGray,
                             }}>
-                            Course Name : {course.courseName}
+                            Teachers available : {course.subjects.length}
                           </Text>
-                          <Text
+                          {course.subjects.slice(0, 2).map(teach => (
+                            <>
+                              <View
+                                key={teach.id}
+                                style={{
+                                  display: 'flex',
+                                  flexDirection: 'row',
+                                  justifyContent: 'space-between',
+                                }}>
+                                <Text
+                                  style={{
+                                    color: COLORS.black,
+                                    textTransform: 'capitalize',
+                                  }}>
+                                  {teach.teacherId.name}
+                                </Text>
+                                <Text>{teach.subjectName}</Text>
+                              </View>
+                            </>
+                          ))}
+                          <View
                             style={{
-                              textTransform: 'capitalize',
-                              ...FONTS.h3,
-                              color: COLORS.black,
+                              display: 'flex',
+                              justifyContent: 'space-between',
+                              // alignItems:'flex-end',
+                              flexDirection: 'row',
+                              paddingTop: 20,
                             }}>
-                            Duration: {course.duration} month
-                          </Text>
-                        </View>
-                        <Text
-                          style={{
-                            paddingVertical: 10,
-                            ...FONTS.body3,
-                            color: COLORS.darkGray,
-                          }}>
-                          Teachers available : {course.subjects.length}
-                        </Text>
-                        {course.subjects.slice(0, 2).map(teach => (
-                          <>
-                            <View
-                              key={teach.id}
+                            <TouchableOpacity
                               style={{
                                 display: 'flex',
                                 flexDirection: 'row',
-                                justifyContent: 'space-between',
-                              }}>
+                                alignItems: 'center',
+                                gap: 10,
+                                justifyContent: 'center',
+                                width: '100%',
+
+                                backgroundColor: COLORS.Primary,
+                                padding: 10,
+                                borderRadius: 14,
+                              }}
+                              onPress={() =>
+                                navigation.navigate('CourseDetails', {
+                                  courseId: course._id,
+                                })
+                              }>
                               <Text
                                 style={{
-                                  color: COLORS.black,
-                                  textTransform: 'capitalize',
+                                  ...FONTS.h3,
+                                  color: COLORS.white,
                                 }}>
-                                {teach.teacherId.name}
+                                About course
                               </Text>
-                              <Text>{teach.subjectName}</Text>
-                            </View>
-                          </>
-                        ))}
-                        <View
-                          style={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            // alignItems:'flex-end',
-                            flexDirection: 'row',
-                            paddingTop: 20,
-                          }}>
-                          <TouchableOpacity
-                            style={{
-                              display: 'flex',
-                              flexDirection: 'row',
-                              alignItems: 'center',
-                              gap: 10,
-                              justifyContent: 'center',
-                              width: '100%',
-
-                              backgroundColor: COLORS.Primary,
-                              padding: 10,
-                              borderRadius: 14,
-                            }}
-                            onPress={() =>
-                              navigation.navigate('CourseDetails', {
-                                courseId: course._id,
-                              })
-                            }>
-                            <Text
-                              style={{
-                                ...FONTS.h3,
-                                color: COLORS.white,
-                              }}>
-                              About course
-                            </Text>
-                            <Image
-                              source={{
-                                uri: 'https://cdn-icons-png.freepik.com/128/271/271228.png?ga=GA1.2.1634828664.1699686714&semt=ais',
-                              }}
-                              alt=""
-                              style={{
-                                width: 15,
-                                height: 15,
-                                borderRadius: 0,
-                                tintColor: COLORS.white,
-                              }}
-                            />
-                          </TouchableOpacity>
+                              <Image
+                                source={{
+                                  uri: 'https://cdn-icons-png.freepik.com/128/271/271228.png?ga=GA1.2.1634828664.1699686714&semt=ais',
+                                }}
+                                alt=""
+                                style={{
+                                  width: 15,
+                                  height: 15,
+                                  borderRadius: 0,
+                                  tintColor: COLORS.white,
+                                }}
+                              />
+                            </TouchableOpacity>
+                          </View>
                         </View>
-                      </View>
-                    </TouchableOpacity>
-                  </>
-                ))}
-              </View>
-            </>
-          )}
+                      </TouchableOpacity>
+                    </>
+                  ))}
+                </>
+              )}
+            </View>
+          </>
         </View>
         <View
           style={{
@@ -389,6 +408,30 @@ export const TimeTable = ({navigation}) => {
   console.log(user);
   console.log('====================================');
   const [selected, setSelected] = React.useState('');
+  const weekday = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
+
+  // const d = new Date();
+  // let day = weekday[d.getDay()];
+  const handleAttendance = () => {
+    const date = new Date();
+    Alert.alert(
+      `Attendance for ${
+        weekday[date.getDay()]
+      } ${date.getDate()}  ${date.getFullYear()} 
+      `,
+    );
+  };
+  // console.log('====================================');
+  // console.log(d.getFullYear(), d);
+  // console.log('====================================');
 
   return (
     <>
@@ -427,40 +470,6 @@ export const TimeTable = ({navigation}) => {
           Exam
         </Text>
       </View>
-      {/* <Calendar
-      // marking={}
-      onDayPress={day => {
-        setSelected(day.dateString);
-        // console.log('====================================');
-        console.log(day);
-        // console.log('====================================');
-      }}
-      // markedDates={marked}
-      markedDates={{
-        [selected]: {
-          marked: true,
-          selected: true,
-          selectedColor: '#00adf3',
-          selectedTextColor: 'white',
-          dotColor: 'white'}
-        // [selected]: {selected: true, disableTouchEvent: true, selectedDotColor: '#fff'}
-      }}
-      theme={{
-        backgroundColor: '#ffffff',
-        calendarBackground: '#ffffff',
-        textSectionTitleColor: '#b6c1cd',
-        selectedDayBackgroundColor: '#00adf5',
-        selectedDayTextColor: '#ffffff',
-        // todayTextColor: '#00adf5',
-        todayTextColor: '#fff',
-        todayBackgroundColor:"#00adf5",
-        dayTextColor: '#2d4150',
-        textDisabledColor: '#d9e',
-        todayDotColor:"#000"
-      }}
-      
-      
-    /> */}
       <View
         style={
           {
@@ -520,7 +529,11 @@ export const TimeTable = ({navigation}) => {
       />
 
       <View>
-        <Button title="Attendance" color={''} />
+        <Button
+          title="Attendance"
+          color={COLORS.green}
+          onPress={handleAttendance}
+        />
       </View>
     </>
   );
@@ -936,6 +949,16 @@ export const Calculator = () => {
             Calculate CGPA (out of 10)
           </Text>
         </TouchableOpacity>
+      </View>
+    </>
+  );
+};
+
+export const Lectures = () => {
+  return (
+    <>
+      <View>
+        <Text></Text>
       </View>
     </>
   );

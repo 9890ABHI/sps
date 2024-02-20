@@ -5,6 +5,7 @@ import SignUp from './auth/SignUp';
 import {
   Calculator,
   Course,
+  Lectures,
   Notifications,
   Student,
   StudentSupport,
@@ -63,6 +64,7 @@ const Index = () => {
         />
         <Stack.Screen name="Student" component={Student} />
         <Stack.Screen name="Course" component={Course} />
+        <Stack.Screen name="Lectures" component={Lectures} />
         <Stack.Screen name="TimeTable" component={TimeTable} />
         <Stack.Screen name="Notifications" component={Notifications} />
         <Stack.Screen name="Notification" component={CreateNotifications} />
