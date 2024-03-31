@@ -68,137 +68,151 @@ export const Teacher = ({navigation}) => {
   };
 
   return (
-    <View
-      style={{
-        padding: 20,
-      }}>
-      <View
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}>
-        <Text
-          style={{
-            ...FONTS.h2,
-            color: COLORS.black,
-          }}>
-          Teacher Profile
-        </Text>
-        <TouchableOpacity onPress={() => setEdit(!edit)}>
-          <Text
-            style={{
-              ...FONTS.h2,
-              color: COLORS.green,
-            }}>
-            {edit ? 'close' : 'Edit'}
-            {/* Edit  */}
-          </Text>
-        </TouchableOpacity>
-      </View>
+    <>
       <View
         style={{
           padding: 20,
-          display: 'flex',
-          gap: 10,
         }}>
-        <Text
+        <View
           style={{
-            color: '#000',
-            ...FONTS.h3,
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
           }}>
-          Name
-        </Text>
-        <TextInput
+          <Text
+            style={{
+              ...FONTS.h2,
+              color: COLORS.black,
+            }}>
+            Teacher Profile
+          </Text>
+          <TouchableOpacity onPress={() => setEdit(!edit)}>
+            <Text
+              style={{
+                ...FONTS.h2,
+                color: COLORS.green,
+              }}>
+              {edit ? 'close' : 'Edit'}
+              {/* Edit  */}
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View
           style={{
-            borderColor: 'gray',
-            width: '100%',
-            borderWidth: 1,
-            borderRadius: 10,
-            padding: 10,
-            ...FONTS.h3,
-          }}
-          // placeholder='abc xyz'
-          editable={edit ? true : false}
-          // onEndEditing={(text) => setName(text)}
-          value={teacherData.name}
-          onChangeText={e => handleChange('name', e)}
-        />
-        <Text
-          style={{
-            color: '#000',
-            ...FONTS.h3,
+            padding: 20,
+            display: 'flex',
+            gap: 10,
           }}>
-          Mobile
-        </Text>
-        <TextInput
-          style={{
-            borderColor: 'gray',
-            width: '100%',
-            borderWidth: 1,
-            borderRadius: 10,
-            padding: 10,
-            ...FONTS.h3,
-          }}
-          // placeholder='
-          editable={edit ? true : false}
-          // onChangeText={(text) => setMobile(text)}
-          // value={teacherDeatils?.mobile}
-          value={teacherData.mobile}
-          onChangeText={e => handleChange('mobile', e)}
-        />
-        <Text
-          style={{
-            color: '#000',
-            ...FONTS.h3,
-          }}>
-          code
-        </Text>
-        <TextInput
-          style={{
-            borderColor: 'gray',
-            width: '100%',
-            borderWidth: 1,
-            borderRadius: 10,
-            padding: 10,
-            ...FONTS.h3,
-          }}
-          // placeholder={code}
-          editable={edit ? true : false}
-          // onChangeText={(text) => setcode(text)}
-          // value={teacherDeatils?.code}
-          value={teacherData.code}
-          onChangeText={e => handleChange('code', e)}
-        />
-        <Text
-          style={{
-            color: '#000',
-            ...FONTS.h3,
-          }}>
-          subject
-        </Text>
-        <TextInput
-          style={{
-            borderColor: 'gray',
-            width: '100%',
-            borderWidth: 1,
-            borderRadius: 10,
-            padding: 10,
-            ...FONTS.h3,
-          }}
-          // placeholder='abc xyz'
-          editable={edit ? true : false}
-          // onChangeText={(text) => setSubject(text)}
-          // value={teacherDeatils?.subject === "" ? "Add Subject" :teacherDeatils?.subject }
-          value={teacherData.subject}
-          onChangeText={e => handleChange('subject', e)}
-        />
+          <Text
+            style={{
+              color: '#000',
+              ...FONTS.h3,
+            }}>
+            Name
+          </Text>
+          <TextInput
+            style={{
+              borderColor: edit ? COLORS.Primary : 'gray',
+              width: '100%',
+              borderWidth: 1,
+              borderRadius: 10,
+              padding: 10,
+              ...FONTS.h3,
+              color: edit ? COLORS.Primary : 'gray',
+              textTransform: 'capitalize',
+            }}
+            // placeholder='abc xyz'
+            editable={edit ? true : false}
+            // onEndEditing={(text) => setName(text)}
+            value={teacherData.name}
+            onChangeText={e => handleChange('name', e)}
+          />
+          <Text
+            style={{
+              color: '#000',
+              ...FONTS.h3,
+            }}>
+            Mobile
+          </Text>
+          <TextInput
+            style={{
+              borderColor: edit ? COLORS.Primary : 'gray',
+              width: '100%',
+              borderWidth: 1,
+              borderRadius: 10,
+              padding: 10,
+              ...FONTS.h3,
+              color: edit ? COLORS.Primary : 'gray',
+            }}
+            // placeholder='
+            editable={edit ? true : false}
+            // onChangeText={(text) => setMobile(text)}
+            // value={teacherDeatils?.mobile}
+            value={teacherData.mobile}
+            onChangeText={e => handleChange('mobile', e)}
+          />
+          <Text
+            style={{
+              color: '#000',
+              ...FONTS.h3,
+            }}>
+            code
+          </Text>
+          <TextInput
+            style={{
+              borderColor: edit ? COLORS.Primary : 'gray',
+              width: '100%',
+              borderWidth: 1,
+              borderRadius: 10,
+              padding: 10,
+              ...FONTS.h3,
+              color: edit ? COLORS.Primary : 'gray',
+            }}
+            // placeholder={code}
+            editable={edit ? true : false}
+            // onChangeText={(text) => setcode(text)}
+            // value={teacherDeatils?.code}
+            value={teacherData.code}
+            onChangeText={e => handleChange('code', e)}
+          />
+          <Text
+            style={{
+              color: '#000',
+              ...FONTS.h3,
+            }}>
+            subject
+          </Text>
+          <TextInput
+            style={{
+              borderColor: edit ? COLORS.Primary1 : 'gray',
+              width: '100%',
+              borderWidth: 1,
+              borderRadius: 10,
+              padding: 10,
+              ...FONTS.h3,
+              textTransform: 'capitalize',
+              color: edit ? COLORS.Primary : 'gray',
+            }}
+            // placeholder='abc xyz'
+            editable={edit ? true : false}
+            // onChangeText={(text) => setSubject(text)}
+            // value={teacherDeatils?.subject === "" ? "Add Subject" :teacherDeatils?.subject }
+            value={teacherData.subject}
+            onChangeText={e => handleChange('subject', e)}
+          />
+        </View>
       </View>
       <View
         style={{
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
+          position: 'absolute',
+          // top: 0,
+          bottom: 10,
+          left: 0,
+          right: 0,
+          zIndex: 10,
         }}>
         <TouchableOpacity
           onPress={updateTeacherInformation}
@@ -217,7 +231,7 @@ export const Teacher = ({navigation}) => {
           </Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </>
   );
 };
 
@@ -328,7 +342,7 @@ export const ClassMangement = ({navigation}) => {
                               ...FONTS.h3,
                               color: COLORS.black,
                             }}>
-                            Duration: {course.duration} month
+                            Duration: {course.duration} months
                           </Text>
                         </View>
                         <Text
@@ -482,9 +496,9 @@ export const ClassMangement = ({navigation}) => {
 
 export const CreateCourseScreen = ({navigation}) => {
   const teacherEmail = useSelector(state => state.auth.teacher.email);
-  console.log('====================================');
-  console.log(teacherEmail);
-  console.log('====================================');
+  // console.log('====================================');
+  // console.log(teacherEmail);
+  // console.log('====================================');
   const [students, setStudents] = useState([]);
   const [teacherDetails, setTeacherDetails] = useState();
 
@@ -501,9 +515,9 @@ export const CreateCourseScreen = ({navigation}) => {
         // const teacherEmail = teacher.email
         const response = await axios.get(BASEURL + 'api/teachers');
         const teacher = response.data; // Assuming your API returns the teacher ID
-        console.log('====================================');
-        console.log(teacher);
-        console.log('====================================');
+        // console.log('====================================');
+        // console.log(teacher);
+        // console.log('====================================');
         setTeacherDetails(response.data);
         // You can dispatch an action to update the Redux state with teacher details or do anything else with the data
         // dispatch(updateTeacherDetails(response.data));
@@ -524,9 +538,9 @@ export const CreateCourseScreen = ({navigation}) => {
     fetchTeacherDetails();
     fetchStudents();
   }, []);
-  console.log('====================================');
-  console.log(courseData.subjects.find(item => item.teacherId));
-  console.log('====================================');
+  // console.log('====================================');
+  // console.log(courseData.subjects.find(item => item.teacherId));
+  // console.log('====================================');
 
   const handleCreateCourse = async () => {
     console.log('====================================');
@@ -540,20 +554,28 @@ export const CreateCourseScreen = ({navigation}) => {
       console.error('Error creating course:', error.message);
     }
   };
-  console.log('====================================');
-  console.log(courseData.subjects);
-  console.log('====================================');
+  // console.log('====================================');
+  // console.log('courseData.subjects', courseData.subjects);
+  // console.log('====================================');
   const handleTeacherSelection = (teacherId, subject) => {
-    // const updatedTeacher = courseData.subjects.teacherId.includes(teacherId )
-    //   ? courseData.subjects.teacherId.filter((id) => id !== teacherId)
-    //   : [...courseData.subjects, { teacherId, subject }];
-    const updatedTeacher = courseData.subjects.some(
+    const isTeacherSelected = courseData.subjects.some(
       teacher => teacher.teacherId === teacherId,
-    )
-      ? courseData.subjects.filter(teacher => teacher.teacherId !== teacherId)
-      : [...courseData.subjects, {teacherId: teacherId, subjectName: subject}];
+    );
 
-    setCourseData({...courseData, subjects: updatedTeacher});
+    if (isTeacherSelected) {
+      // If teacher is already selected, remove them from the list
+      const updatedSubjects = courseData.subjects.filter(
+        teacher => teacher.teacherId !== teacherId,
+      );
+      setCourseData({...courseData, subjects: updatedSubjects});
+    } else {
+      // If teacher is not selected, add them to the list
+      const updatedSubjects = [
+        ...courseData.subjects,
+        {teacherId, subjectName: subject},
+      ];
+      setCourseData({...courseData, subjects: updatedSubjects});
+    }
   };
   const handleStudentSelection = studentId => {
     // Add or remove the selected student based on their current presence in the students array
@@ -565,82 +587,87 @@ export const CreateCourseScreen = ({navigation}) => {
   };
 
   return (
-    <View>
+    <>
       <View>
-        {/* <Text>
+        <View>
+          {/* <Text>
           {teacherDetails.name}
         </Text> */}
-      </View>
+        </View>
 
-      <View
-        style={{
-          display: 'flex',
-          gap: 10,
-          padding: 10,
-          paddingHorizontal: 20,
-        }}>
-        <Text
-          style={{
-            color: '#000',
-            ...FONTS.h3,
-          }}>
-          Course Name
-        </Text>
-        <TextInput
-          style={{
-            borderColor: 'gray',
-            width: '100%',
-            borderWidth: 1,
-            borderRadius: 10,
-            padding: 10,
-            ...FONTS.h3,
-          }}
-          placeholder="Course Name"
-          onChangeText={text =>
-            setCourseData({...courseData, courseName: text})
-          }
-          value={courseData.courseName}
-        />
-        <Text
-          style={{
-            color: '#000',
-            ...FONTS.h3,
-          }}>
-          Duration
-        </Text>
-        <TextInput
-          style={{
-            borderColor: 'gray',
-            width: '100%',
-            borderWidth: 1,
-            borderRadius: 10,
-            padding: 10,
-            ...FONTS.h3,
-          }}
-          placeholder="Duration"
-          onChangeText={text => setCourseData({...courseData, duration: text})}
-          value={courseData.duration}
-        />
-      </View>
-      <View
-        style={{
-          display: 'flex',
-          gap: 10,
-          paddingHorizontal: 10,
-        }}>
-        <Text
-          style={{
-            ...FONTS.h3,
-          }}>
-          Select Techers:
-        </Text>
-        <ScrollView
+        <View
           style={{
             display: 'flex',
-            paddingHorizontal: 10,
             gap: 10,
+            padding: 10,
+            paddingHorizontal: 20,
           }}>
-          {courseData.subjects.map(item => (
+          <Text
+            style={{
+              color: '#000',
+              ...FONTS.h3,
+            }}>
+            Course Name
+          </Text>
+          <TextInput
+            style={{
+              borderColor: COLORS.gray2,
+              width: '100%',
+              borderWidth: 1,
+              borderRadius: 10,
+              padding: 10,
+              ...FONTS.h3,
+              backgroundColor: COLORS.white,
+            }}
+            placeholder="Course Name"
+            onChangeText={text =>
+              setCourseData({...courseData, courseName: text})
+            }
+            value={courseData.courseName}
+          />
+          <Text
+            style={{
+              color: '#000',
+              ...FONTS.h3,
+            }}>
+            Duration
+          </Text>
+          <TextInput
+            style={{
+              borderColor: COLORS.gray2,
+              width: '100%',
+              borderWidth: 1,
+              borderRadius: 10,
+              padding: 10,
+              ...FONTS.h3,
+              backgroundColor: COLORS.white,
+            }}
+            placeholder="Duration in Months"
+            onChangeText={text =>
+              setCourseData({...courseData, duration: text})
+            }
+            value={courseData.duration}
+          />
+        </View>
+        <View
+          style={{
+            display: 'flex',
+            gap: 10,
+            paddingHorizontal: 10,
+          }}>
+          <Text
+            style={{
+              ...FONTS.h3,
+            }}>
+            Select Techers:
+          </Text>
+          <ScrollView
+            style={{
+              display: 'flex',
+              paddingHorizontal: 10,
+              gap: 10,
+            }}>
+            {/* {courseData.subjects.map(item => (
             <>
               <View key={item.id}>
                 <Text
@@ -652,121 +679,166 @@ export const CreateCourseScreen = ({navigation}) => {
                 </Text>
               </View>
             </>
-          ))}
-          {teacherDetails?.map((teacher, i) => (
-            <View
-              key={teacher._id}
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                backgroundColor: COLORS.white,
-                paddingVertical: 5,
-                paddingHorizontal: 10,
-              }}>
-              <Text>{i + 1}</Text>
-              <Text
-                style={{
-                  ...FONTS.h3,
-                  color: COLORS.black,
-                  textTransform: 'capitalize',
-                }}>
-                {teacher.name}
-              </Text>
-              <Text
-                style={{
-                  ...FONTS.h3,
-                  color: COLORS.black,
-                  textTransform: 'capitalize',
-                }}>
-                {teacher.subject}
-              </Text>
-
+          ))} */}
+            {teacherDetails?.map((teacher, i) => (
               <View
-                style={
-                  {
-                    // width:'30%'
-                  }
-                }>
-                <TouchableOpacity
-                  onPress={() =>
-                    handleTeacherSelection(teacher._id, teacher.subject)
+                key={teacher._id}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  backgroundColor: COLORS.white,
+                  paddingVertical: 5,
+                  paddingHorizontal: 10,
+                  borderRadius: 10,
+                }}>
+                <Text>{i + 1}</Text>
+                <Text
+                  style={{
+                    ...FONTS.h3,
+                    color: COLORS.black,
+                    textTransform: 'capitalize',
+                  }}>
+                  {teacher.name}
+                </Text>
+                <Text
+                  style={{
+                    ...FONTS.h3,
+                    color: COLORS.black,
+                    textTransform: 'capitalize',
+                  }}>
+                  {teacher.subject}
+                </Text>
+
+                <View
+                  style={
+                    {
+                      // width:'30%'
+                    }
                   }>
-                  {courseData.subjects.some(
-                    teacher => teacher.teacherId === teacher._id,
-                  ) ? (
-                    <Icon name={'add'} size={30} color={COLORS.green} />
-                  ) : (
-                    <Icon name={'delete'} size={30} color={COLORS.red} />
-                  )}
-                </TouchableOpacity>
-                {/* <Button
+                  <TouchableOpacity
+                    onPress={() =>
+                      handleTeacherSelection(teacher._id, teacher.subject)
+                    }>
+                    {courseData.subjects.some(
+                      subject => subject.teacherId === teacher._id,
+                    ) ? (
+                      // <Icon name={'add'} size={30} color={COLORS.green} />
+                      <Icon name={'delete'} size={30} color={COLORS.red} />
+                    ) : (
+                      // <Icon name={'delete'} size={30} color={COLORS.red} />
+                      <Icon name={'add'} size={30} color={COLORS.green} />
+                    )}
+                  </TouchableOpacity>
+                  {/* <Button
             title={courseData.subjects.includes(teacher._id) ? 'Remove' : 'Add'}
             onPress={() => handleTeacherSelection(teacher._id)}
           />
            */}
+                </View>
               </View>
-            </View>
-          ))}
-        </ScrollView>
-        {/* Display the list of students */}
-        <Text>Select Students:</Text>
+            ))}
+          </ScrollView>
+          {/* Display the list of students */}
+          <Text>Select Students:</Text>
 
-        <ScrollView
-          style={{
-            display: 'flex',
-            paddingHorizontal: 10,
-            gap: 10,
-          }}>
-          {students.map((student, i) => (
-            <View
-              key={student._id}
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                backgroundColor: COLORS.white,
-                paddingVertical: 5,
-                paddingHorizontal: 10,
-              }}>
-              <Text>{i + 1}</Text>
-              <Text
-                style={{
-                  ...FONTS.h3,
-                  color: COLORS.black,
-                  textTransform: 'capitalize',
-                }}>
-                {student.name}
-              </Text>
+          <ScrollView
+            style={{
+              display: 'flex',
+              paddingHorizontal: 10,
+              gap: 10,
+            }}>
+            {students.map((student, i) => (
               <View
-                style={
-                  {
-                    // width:'30%'
-                  }
-                }>
-                <TouchableOpacity
-                  onPress={() => handleStudentSelection(student._id)}>
-                  {!courseData.students.includes(student._id) ? (
-                    <Icon name={'add'} size={30} color={COLORS.green} />
-                  ) : (
-                    <Icon name={'delete'} size={30} color={COLORS.red} />
-                  )}
-                </TouchableOpacity>
-                {/* <Button
+                key={student._id}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  backgroundColor: COLORS.white,
+                  paddingVertical: 5,
+                  paddingHorizontal: 10,
+
+                  borderRadius: 10,
+                }}>
+                <Text>{i + 1}</Text>
+                <Text
+                  style={{
+                    ...FONTS.h3,
+                    color: COLORS.black,
+                    textTransform: 'capitalize',
+                  }}>
+                  {student.name}
+                </Text>
+                <View
+                  style={
+                    {
+                      // width:'30%'
+                    }
+                  }>
+                  <TouchableOpacity
+                    onPress={() => handleStudentSelection(student._id)}>
+                    {!courseData.students.includes(student._id) ? (
+                      <Icon name={'add'} size={30} color={COLORS.green} />
+                    ) : (
+                      <Icon name={'delete'} size={30} color={COLORS.red} />
+                    )}
+                  </TouchableOpacity>
+                  {/* <Button
             title={courseData.students.includes(student._id) ? 'Remove' : 'Add'}
             onPress={() => handleStudentSelection(student._id)}
           /> */}
+                </View>
               </View>
-            </View>
-          ))}
-        </ScrollView>
-      </View>
-      {/* Add more input fields for other properties if needed */}
+            ))}
+          </ScrollView>
+        </View>
+        {/* Add more input fields for other properties if needed */}
 
-      <Button title="Create Course" onPress={handleCreateCourse} />
-    </View>
+        {/* <Button title="Create Course" onPress={handleCreateCourse} /> */}
+      </View>
+
+      <>
+        <View
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            gap: 2,
+            flexDirection: 'row',
+            // paddingHorizontal: 10,
+            justifyContent: 'space-around',
+            paddingBottom: 10,
+          }}>
+          <TouchableOpacity
+            style={{
+              padding: 10,
+              width: '78%',
+              backgroundColor: COLORS.green,
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexDirection: 'row',
+              borderRadius: 20,
+              gap: 20,
+            }}
+            onPress={handleCreateCourse}>
+            <Icon name={'add'} size={30} color={COLORS.white} />
+            <Text
+              style={{
+                ...FONTS.h3,
+                color: COLORS.white,
+                fontWeight: 700,
+                letterSpacing: 1,
+              }}>
+              Create Course
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </>
+    </>
   );
 };
 

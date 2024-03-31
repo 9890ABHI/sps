@@ -245,7 +245,7 @@ export const Course = ({navigation}) => {
                 gap: 20,
               }}>
               <Text style={{...FONTS.h2, color: COLORS.black}}>
-                Courses available :
+                Courses Available :
                 {loading ? (
                   <>
                     <ActivityIndicator
@@ -462,13 +462,13 @@ export const TimeTable = ({navigation}) => {
           }}>
           Regular
         </Text>
-        <Text
+        {/* <Text
           style={{
             ...FONTS.h2,
             color: COLORS.black,
           }}>
           Exam
-        </Text>
+        </Text> */}
       </View>
       <View
         style={
@@ -485,12 +485,13 @@ export const TimeTable = ({navigation}) => {
               style={{
                 display: 'flex',
                 flexDirection: 'row',
-                paddingVertical: 15,
+                paddingVertical: 10,
                 justifyContent: 'center',
                 alignItems: 'center',
                 borderBottomColor: '#000',
                 borderBottomWidth: 0.5,
                 paddingHorizontal: 10,
+                gap: 5,
               }}>
               <Text
                 style={{
@@ -505,7 +506,7 @@ export const TimeTable = ({navigation}) => {
                   fontSize: 15,
                   color: '#000',
                 }}>
-                {item.firstPeriod}
+                : {item.firstPeriod}
               </Text>
               <Text
                 style={{
@@ -906,20 +907,24 @@ export const Calculator = () => {
       <View
         style={{
           position: 'absolute',
-          bottom: 0,
+          bottom: 10,
           left: 0,
           right: 0,
-          gap: 10,
+          gap: 2,
+          flexDirection: 'row',
+          // paddingHorizontal: 10,
+          justifyContent: 'space-around',
         }}>
         <TouchableOpacity
           style={{
             padding: 10,
-            width: '100%',
+            width: '48%',
             backgroundColor: COLORS.green,
             justifyContent: 'center',
             alignItems: 'center',
             flexDirection: 'row',
-            gap: 20,
+            borderRadius: 20,
+            // gap: 20,
           }}
           onPress={calculateGPA}>
           <Text
@@ -933,12 +938,13 @@ export const Calculator = () => {
         <TouchableOpacity
           style={{
             padding: 10,
-            width: '100%',
+            width: '48%',
             backgroundColor: COLORS.green,
             justifyContent: 'center',
             alignItems: 'center',
             flexDirection: 'row',
-            gap: 20,
+            borderRadius: 20,
+            // gap: 20,
           }}
           onPress={calculateCGPA}>
           <Text
@@ -946,7 +952,7 @@ export const Calculator = () => {
               ...FONTS.h3,
               color: COLORS.white,
             }}>
-            Calculate CGPA (out of 10)
+            Calculate CGPA
           </Text>
         </TouchableOpacity>
       </View>
@@ -954,12 +960,198 @@ export const Calculator = () => {
   );
 };
 
-export const Lectures = () => {
+export const Lectures = ({navigation}) => {
+  const DataImage = [
+    {
+      id: 1,
+      name: 'What is Big Data | Big Data in 2 Minutes | Introduction to Big Data | Big Data Training | Edureka',
+      image_link: 'https://img.youtube.com/vi/UQeyU0YcPKY/maxresdefault.jpg',
+      youtube_link: 'https://youtu.be/UQeyU0YcPKY?si=IgBrXFk-rH8JyRKw',
+    },
+
+    {
+      id: 2,
+      name: 'What is HPC ?',
+      image_link: 'https://img.youtube.com/vi/Xou32Th2Eos/sddefault.jpg',
+      youtube_link: 'https://youtu.be/Xou32Th2Eos?si=lfd68bTcdMimrhEw',
+    },
+    {
+      id: 3,
+      name: 'Cloud computing in 6 Minutes | Chat is Cloud Computing ?',
+      image_link: 'https://img.youtube.com/vi/M988_fsOSWo/sddefault.jpg',
+      youtube_link: 'https://youtu.be/M988_fsOSWo?si=lkvi9eZ6UvYuvDlQ',
+    },
+    {
+      id: 4,
+      name: 'What is HPC ?',
+      image_link: 'https://img.youtube.com/vi/tGIobcyKViI/maxresdefault.jpg',
+      youtube_link: 'https://youtube.com/watch?v=tGIobcyKViI',
+    },
+  ];
   return (
     <>
-      <View>
-        <Text></Text>
-      </View>
+      <ScrollView>
+        <View>
+          <View
+            style={{
+              paddingLeft: 10,
+            }}>
+            <TextHeader title={'Lectures'} key={''} />
+          </View>
+
+          <View>
+            <FlatList
+              data={DataImage}
+              style={{
+                gap: 20,
+                paddingBottom: 20,
+              }}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({item}) => (
+                <View
+                  style={{
+                    paddingVertical: 10,
+                  }}>
+                  <View
+                    style={{
+                      paddingHorizontal: 10,
+                      paddingVertical: 10,
+                      backgroundColor: COLORS.white,
+                      borderRadius: 20,
+                    }}
+                    onPress={() => Linking.openURL(item.youtube_link)}>
+                    <View
+                      style={{
+                        padding: 0,
+                        height: 200,
+                        position: 'relative',
+                      }}>
+                      <Image
+                        source={{
+                          uri: item.image_link,
+                        }}
+                        alt=""
+                        style={{
+                          // width: 3,
+                          height: '100%',
+                          borderRadius: 14,
+                          objectFit: 'contain',
+
+                          // tintColor: COLORS.white,
+                          // transform: 'rotate(45deg)',
+                        }}
+                      />
+                      <View
+                        style={{
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          bottom: 0,
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                        }}>
+                        <Image
+                          source={{
+                            uri: 'https://cdn-icons-png.freepik.com/256/7826/7826802.png?ga=GA1.2.1634828664.1699686714&',
+                          }}
+                          alt=""
+                          style={{
+                            width: 70,
+                            height: 70,
+                            borderRadius: 0,
+                            shadowOpacity: 3,
+                            shadowColor: COLORS.PrimaryBlue,
+                            // tintColor: COLORS.white,
+                          }}
+                        />
+                      </View>
+                    </View>
+
+                    <Text
+                      style={{
+                        ...FONTS.h3,
+                        color: COLORS.black,
+                        fontWeight: 700,
+                        paddingHorizontal: 10,
+                      }}>
+                      {item.name}
+                    </Text>
+                  </View>
+                </View>
+              )}
+            />
+          </View>
+          {/* <View
+          style={{
+            paddingHorizontal: 10,
+            paddingVertical: 10,
+            backgroundColor: COLORS.white,
+            borderRadius: 10,
+          }}>
+          <View
+            style={{
+              padding: 10,
+              height: 200,
+              position: 'relative',
+            }}>
+            <Image
+              onPress={() =>
+                Linking.openURL('https://youtube.com/watch?v=tGIobcyKViI')
+              }
+              source={{
+                uri: 'https://img.youtube.com/vi/tGIobcyKViI/maxresdefault.jpg',
+              }}
+              alt=""
+              style={{
+                // width: 3,
+                height: '100%',
+                borderRadius: 10,
+                objectFit: 'contain',
+
+                // tintColor: COLORS.white,
+                // transform: 'rotate(45deg)',
+              }}
+            />
+            <View
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Image
+                source={{
+                  uri: 'https://cdn-icons-png.freepik.com/256/7826/7826802.png?ga=GA1.2.1634828664.1699686714&',
+                }}
+                alt=""
+                style={{
+                  width: 70,
+                  height: 70,
+                  borderRadius: 0,
+                  shadowOpacity: 3,
+                  shadowColor: COLORS.PrimaryBlue,
+                  // tintColor: COLORS.white,
+                }}
+              />
+            </View>
+          </View>
+
+          <Text
+            style={{
+              ...FONTS.h3,
+              color: COLORS.black,
+              fontWeight: 700,
+              paddingHorizontal: 10,
+            }}>
+            {' >'} WHat is HPC?
+          </Text>
+        </View> */}
+        </View>
+      </ScrollView>
     </>
   );
 };

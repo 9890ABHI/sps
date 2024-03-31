@@ -81,8 +81,8 @@ export const TimeTableData = [
   {
     title: 'Saturday',
     firstPeriod: 'CC',
-    secondPeriod: 'DSA',
-    thirdPeriod: 'BT',
+    secondPeriod: 'BT',
+    thirdPeriod: '-',
   },
 ];
 

@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
+import {View, Text, TouchableOpacity, ScrollView, Button} from 'react-native';
 import React, {useEffect} from 'react';
 import Card from '../Card';
 import {TextHeader} from '../Header';
@@ -8,7 +8,7 @@ import axios from 'axios';
 
 const Teacher = ({navigation}) => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.auth.teacher);
+  const user = useSelector(state => state.auth);
   // useEffect(() => {
   //   const fetchTeacherDetails = async () => {
   //     try {
@@ -32,81 +32,93 @@ const Teacher = ({navigation}) => {
     navigation.navigate('TeacherLogin');
   };
   return (
-    <ScrollView>
-      <View
-        style={{
-          paddingHorizontal: 20,
-        }}>
-        <TextHeader title={'Teacher Portal System'} />
-      </View>
-      <View
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          flexDirection: 'row',
-          width: '100%',
-          height: '100%',
-          justifyContent: 'center',
-          alignItems: 'center',
-          // backgroundColor:"#000",
-          gap: 10,
-          paddingTop: 20,
-        }}>
-        <TouchableOpacity onPress={() => navigation.navigate('Teacher')}>
-          <Card
-            title="Profile"
-            img="https://img.freepik.com/free-vector/diary-concept-illustration_114360-3755.jpg?size=626&ext=jpg"
-          />
-        </TouchableOpacity>
+    <>
+      {!user ? (
+        <>
+          <Text>loading....</Text>
+        </>
+      ) : (
+        <>
+          <ScrollView>
+            <View
+              style={{
+                paddingHorizontal: 20,
+              }}>
+              <TextHeader title={'Teacher Portal System'} />
+            </View>
+            <View
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                flexDirection: 'row',
+                width: '100%',
+                height: '100%',
+                justifyContent: 'center',
+                alignItems: 'center',
+                // backgroundColor:"#000",
+                gap: 10,
+                paddingTop: 20,
+              }}>
+              <TouchableOpacity onPress={() => navigation.navigate('Teacher')}>
+                <Card
+                  title="Profile"
+                  img="https://img.freepik.com/free-vector/diary-concept-illustration_114360-3755.jpg?size=626&ext=jpg"
+                />
+              </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate('ClassMangement')}>
-          <Card
-            title="Class Mangement"
-            img="https://img.freepik.com/free-vector/professor-concept-illustration_114360-3767.jpg"
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('CreateCourseScreen')}>
-          <Card
-            title="Course Mangement"
-            img="https://img.freepik.com/free-vector/professor-concept-illustration_114360-3767.jpg"
-          />
-        </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('ClassMangement')}>
+                <Card
+                  title="Class Mangement"
+                  img="https://img.freepik.com/free-vector/professor-concept-illustration_114360-3767.jpg"
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('CreateCourseScreen')}>
+                <Card
+                  title="Course Mangement"
+                  img="https://img.freepik.com/free-vector/professor-concept-illustration_114360-3767.jpg"
+                />
+              </TouchableOpacity>
 
-        {/* <TouchableOpacity onPress={() => navigation.navigate('TimeTable')}>
+              {/* <TouchableOpacity onPress={() => navigation.navigate('TimeTable')}>
         <Card
           title="Gradebook and assessments"
           img="https://img.freepik.com/free-vector/diary-concept-illustration_114360-3755.jpg?size=626&ext=jpg"
         />
       </TouchableOpacity> */}
 
-        <TouchableOpacity onPress={() => navigation.navigate('Notification')}>
-          <Card
-            title="Announcements and Notifications"
-            img="https://img.freepik.com/free-vector/diary-concept-illustration_114360-3755.jpg?size=626&ext=jpg"
-          />
-        </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('Notification')}>
+                <Card
+                  title="Announcements and Notifications"
+                  img="https://img.freepik.com/free-vector/diary-concept-illustration_114360-3755.jpg?size=626&ext=jpg"
+                />
+              </TouchableOpacity>
 
-        {/* <TouchableOpacity onPress={() => navigation.navigate('Attendance')}>
+              {/* <TouchableOpacity onPress={() => navigation.navigate('Attendance')}>
           <Card
             title="Attendance Tracker"
             img="https://img.freepik.com/free-vector/diary-concept-illustration_114360-3755.jpg?size=626&ext=jpg"
           />
         </TouchableOpacity> */}
-        {/* <TouchableOpacity onPress={() => navigation.navigate('UpdateEmail')}>
+              {/* <TouchableOpacity onPress={() => navigation.navigate('UpdateEmail')}>
         <Card
           title="Settings"
           img="https://img.freepik.com/free-vector/diary-concept-illustration_114360-3755.jpg?size=626&ext=jpg"
         />
       </TouchableOpacity> */}
-        <TouchableOpacity onPress={handleLogOut}>
-          <Card
-            title="LogOut"
-            img="https://img.freepik.com/free-vector/diary-concept-illustration_114360-3755.jpg?size=626&ext=jpg"
-          />
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+              <TouchableOpacity onPress={handleLogOut}>
+                <Card
+                  title="LogOut"
+                  img="https://img.freepik.com/free-vector/diary-concept-illustration_114360-3755.jpg?size=626&ext=jpg"
+                />
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
+        </>
+      )}
+    </>
   );
 };
 

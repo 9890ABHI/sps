@@ -20,6 +20,9 @@ const Card = ({navigation, title, img, link}) => {
         maxWidth: 180,
         height: 200,
         justifyContent: 'space-around',
+        // borderWidth: 0.5,
+        // borderColor: COLORS.gray2,
+        shadowColor: COLORS.black,
       }}
       // key={item.id}
     >
@@ -32,7 +35,14 @@ const Card = ({navigation, title, img, link}) => {
         }}
         resizeMode="contain"
       />
-      <Text style={{...FONTS.body3, color: COLORS.green, textAlign: 'center'}}>
+      <Text
+        style={{
+          ...FONTS.h3,
+          fontWeight: 700,
+          color: COLORS.green,
+          textAlign: 'center',
+          letterSpacing: 1,
+        }}>
         {title}
       </Text>
     </View>

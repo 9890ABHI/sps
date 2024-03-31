@@ -26,7 +26,7 @@ import {
 import DetailsWeek from '../Components/DetailsWeek';
 import LoadingScreen from '../Components/LoadingScreen';
 
-const Index = () => {
+const Index = ({navigation}) => {
   const Stack = createNativeStackNavigator();
   return (
     <>

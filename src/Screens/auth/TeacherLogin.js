@@ -15,7 +15,7 @@ import {COLORS, FONTS} from '../../Assets/Theme';
 
 const TeacherLogin = ({navigation}) => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.auth.user);
+  const user = useSelector(state => state.auth);
   const [showPass, setShowPass] = useState(true);
   // console.log('==== User Auth === null or not ====');
   // console.log(user);
@@ -32,17 +32,38 @@ const TeacherLogin = ({navigation}) => {
     });
   };
 
-  const handleLogin = () => {
-    if (formData.email | (formData.password !== '')) {
+  const handleLogin = async () => {
+    // if (formData.email | (formData.password !== '')) {
+    //   console.log('====================================');
+    //   console.log(formData);
+    //   console.log('====================================');
+    //   dispatch(teacherlogin(formData));
+    //   user.teacher ? navigation.navigate('Home') : handleNotFound(User.error);
+    // }
+    // if (formData.email | (formData.password === '')) {
+    //   Alert.alert('Enter Email and password', 'some values are empty');
+    // }
+    if (formData.email === '' || formData.password === '') {
+      Alert.alert('Enter Email and Password', 'Some values are empty');
+    } else {
       console.log('====================================');
-      console.log(formData);
+      console.log('formData', formData);
       console.log('====================================');
-      dispatch(teacherlogin(formData));
-      navigation.navigate('Home');
+      try {
+        const response = await dispatch(teacherlogin(formData));
+        if (response === 'User dosent Exist' || user.error === undefined) {
+          Alert.alert('User Not Found', 'Please check your email or password');
+        } else {
+          navigation.navigate('Home');
+        }
+      } catch (error) {
+        console.error('Error during login:', error);
+        Alert.alert('Login Failed', 'An error occurred during login');
+      }
     }
-    if (formData.email | (formData.password === '')) {
-      Alert.alert('Enter Email and password', 'some values are empty');
-    }
+  };
+  const handleNotFound = error => {
+    Alert.alert(error);
   };
   return (
     <>

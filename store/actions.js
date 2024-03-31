@@ -41,20 +41,28 @@ export const signupFailure = error => ({type: SIGNUP_FAILURE, error});
 
 // export const BASEURL = 'http://192.168.0.197:3001/';
 // export const BASEURL = 'http://192.168.43.13:3001/';
-export const BASEURL = 'https://sps-backend-axyz28475.onrender.com/';
+// export const BASEURL = 'http://192.168.11.1:3001/';
+// export const BASEURL = 'http://192.168.63.170:3001/';
+// export const BASEURL = 'https://sps-backend-axyz28475.onrender.com/';
+export const BASEURL = 'https://sps-backend-x5fl.onrender.com';
+// export const BASEURL = 'https://timely-llama-00d951.netlify.app';
 
 export const login = credentials => async dispatch => {
   try {
+    dispatch(loginRequest());
     await axios
       .post(BASEURL + 'login', credentials)
       .then(res => {
-        console.log(res.data);
-        console.log('credentials', credentials);
-        dispatch(loginSuccess(res.data.data));
+        // console.log(res.data);
+        // console.log('credentials', credentials);
+
+        res.data.data == 'User dosent Exist'
+          ? dispatch(loginFailure(error.data))
+          : dispatch(loginSuccess(res.data.data));
       })
-      .catch(error => Alert.alert(error));
+      .catch(error => dispatch(loginFailure(error.data)));
   } catch (error) {
-    dispatch(loginFailure(error));
+    dispatch(loginFailure(error.data));
   }
 };
 export const teacherlogin = credentials => async dispatch => {
@@ -64,9 +72,10 @@ export const teacherlogin = credentials => async dispatch => {
       .post(BASEURL + 'loginteacher', credentials)
       .then(res => {
         console.log('res', res.data.data);
+        // res.data.data === 'User dosent Exist' ? dispatch(teacherLoginFailure(res.data.error)):
         dispatch(teacherLoginSuccess(res.data.data));
       })
-      .catch(error => Alert.alert(error));
+      .catch(error => dispatch(teacherLoginFailure(error)));
   } catch (error) {
     dispatch(teacherLoginFailure(error));
   }

@@ -47,7 +47,7 @@ export const CourseStudent = ({navigation}) => {
           display: 'flex',
           gap: 20,
         }}>
-        <Text style={{...FONTS.h2, color: COLORS.black}}>Courses applied </Text>
+        <Text style={{...FONTS.h2, color: COLORS.black}}>Courses Applied </Text>
         {applyLoading ? (
           <>
             <ActivityIndicator

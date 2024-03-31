@@ -13,11 +13,12 @@ import {
 } from './actions';
 
 const initialState = {
-  teacher: null,
+  teacher: false,
   user: null,
   error: null,
   isLoading: false,
-  student: true,
+  student: false,
+  isActive: true,
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -26,19 +27,19 @@ export const authReducer = (state = initialState, action) => {
     case SIGNUP_REQUEST:
       return {...state, isLoading: true};
 
-    case LOGIN_SUCCESS:
-    case SIGNUP_SUCCESS:
+    case TEACHER_LOGIN_REQUEST:
+      return {...state, loading: true, error: null};
+
+    case LOGIN_SUCCESS || SIGNUP_SUCCESS:
       return {
         ...state,
-        user: action.payload,
+        user: action.payload == 'User dosent Exist' ? null : action.payload,
         isLoading: false,
         error: null,
         teacher: null,
         student: true,
+        isActive: action.payload == 'User dosent Exist' ? true : false,
       };
-
-    case TEACHER_LOGIN_REQUEST:
-      return {...state, loading: true, error: null};
 
     case TEACHER_LOGIN_SUCCESS:
       return {
@@ -48,6 +49,7 @@ export const authReducer = (state = initialState, action) => {
         error: null,
         user: null,
         student: false,
+        isActive: false,
       };
 
     case TEACHER_LOGIN_FAILURE:
@@ -59,14 +61,14 @@ export const authReducer = (state = initialState, action) => {
         user: null,
       };
 
-    case LOGIN_FAILURE:
-    case SIGNUP_FAILURE:
+    case LOGIN_FAILURE || SIGNUP_FAILURE:
       return {
         ...state,
         user: null,
         isLoading: false,
         error: action.error,
-        teacher: null,
+        teacher: false,
+        isActive: true,
       };
 
     case LOGOUT:
@@ -77,6 +79,7 @@ export const authReducer = (state = initialState, action) => {
         isLoading: false,
         teacher: null,
         student: false,
+        isActive: true,
       };
 
     default:
