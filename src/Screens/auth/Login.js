@@ -160,7 +160,7 @@ const Login = ({navigation}) => {
                         fontWeight: 700,
                         color: COLORS.Primary,
                       }}>
-                      Sign in
+                      Login
                     </Text>
                   </View>
                   <Text
@@ -170,7 +170,7 @@ const Login = ({navigation}) => {
                       color: COLORS.Primary1,
                     }}
                     onPress={() => navigation.navigate('SignUp')}>
-                    Sign up
+                    Register
                   </Text>
                 </View>
               </View>
@@ -321,7 +321,7 @@ const Login = ({navigation}) => {
                       ...FONTS.h2,
                       fontSize: 25,
                     }}>
-                    Sign in
+                    Login
                   </Text>
 
                   <TouchableOpacity

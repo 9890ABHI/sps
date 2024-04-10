@@ -1,5 +1,4 @@
 import axios from 'axios';
-import {Alert} from 'react-native';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -39,13 +38,7 @@ export const signupRequest = () => ({type: SIGNUP_REQUEST});
 export const signupSuccess = user => ({type: SIGNUP_SUCCESS, user});
 export const signupFailure = error => ({type: SIGNUP_FAILURE, error});
 
-// export const BASEURL = 'http://192.168.0.197:3001/';
-// export const BASEURL = 'http://192.168.43.13:3001/';
-// export const BASEURL = 'http://192.168.11.1:3001/';
-// export const BASEURL = 'http://192.168.63.170:3001/';
-// export const BASEURL = 'https://sps-backend-axyz28475.onrender.com/';
-export const BASEURL = 'https://sps-backend-x5fl.onrender.com';
-// export const BASEURL = 'https://timely-llama-00d951.netlify.app';
+export const BASEURL = 'https://sps-backend-axyz28475.onrender.com/';
 
 export const login = credentials => async dispatch => {
   try {
@@ -53,9 +46,6 @@ export const login = credentials => async dispatch => {
     await axios
       .post(BASEURL + 'login', credentials)
       .then(res => {
-        // console.log(res.data);
-        // console.log('credentials', credentials);
-
         res.data.data == 'User dosent Exist'
           ? dispatch(loginFailure(error.data))
           : dispatch(loginSuccess(res.data.data));
@@ -72,7 +62,6 @@ export const teacherlogin = credentials => async dispatch => {
       .post(BASEURL + 'loginteacher', credentials)
       .then(res => {
         console.log('res', res.data.data);
-        // res.data.data === 'User dosent Exist' ? dispatch(teacherLoginFailure(res.data.error)):
         dispatch(teacherLoginSuccess(res.data.data));
       })
       .catch(error => dispatch(teacherLoginFailure(error)));
@@ -93,3 +82,11 @@ export const signup = userData => async dispatch => {
     dispatch(signupFailure(error));
   }
 };
+
+// export const BASEURL = 'http://192.168.0.197:3001/';
+// export const BASEURL = 'http://192.168.43.13:3001/';
+// export const BASEURL = 'http://192.168.11.1:3001/';
+// export const BASEURL = 'http://192.168.63.170:3001/';
+// export const BASEURL ='https://api.render.com/deploy/srv-co4mpdf79t8c7394d80g?key=0WnDF8cK_zo';
+// export const BASEURL = 'https://sps-backend-x5fl.onrender.com';
+// export const BASEURL = 'https://timely-llama-00d951.netlify.app';

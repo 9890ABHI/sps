@@ -119,7 +119,7 @@ const TeacherRegister = ({navigation}) => {
                     color: COLORS.Primary1,
                   }}
                   onPress={() => navigation.navigate('TeacherLogin')}>
-                  Sign in
+                  Login
                 </Text>
 
                 <View
@@ -133,7 +133,7 @@ const TeacherRegister = ({navigation}) => {
                       fontWeight: 700,
                       color: COLORS.Primary,
                     }}>
-                    Sign up
+                    Register
                   </Text>
                 </View>
               </View>
@@ -356,7 +356,7 @@ const TeacherRegister = ({navigation}) => {
                     ...FONTS.h2,
                     fontSize: 25,
                   }}>
-                  Sign up
+                  Register
                 </Text>
 
                 <TouchableOpacity

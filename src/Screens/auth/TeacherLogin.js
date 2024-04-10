@@ -33,22 +33,9 @@ const TeacherLogin = ({navigation}) => {
   };
 
   const handleLogin = async () => {
-    // if (formData.email | (formData.password !== '')) {
-    //   console.log('====================================');
-    //   console.log(formData);
-    //   console.log('====================================');
-    //   dispatch(teacherlogin(formData));
-    //   user.teacher ? navigation.navigate('Home') : handleNotFound(User.error);
-    // }
-    // if (formData.email | (formData.password === '')) {
-    //   Alert.alert('Enter Email and password', 'some values are empty');
-    // }
     if (formData.email === '' || formData.password === '') {
       Alert.alert('Enter Email and Password', 'Some values are empty');
     } else {
-      console.log('====================================');
-      console.log('formData', formData);
-      console.log('====================================');
       try {
         const response = await dispatch(teacherlogin(formData));
         if (response === 'User dosent Exist' || user.error === undefined) {
@@ -69,9 +56,6 @@ const TeacherLogin = ({navigation}) => {
     <>
       <View
         style={{
-          // display: 'flex',
-          // justifyContent: 'end',
-          // alignItems: 'center',
           height: '100%',
         }}>
         <View
@@ -84,7 +68,6 @@ const TeacherLogin = ({navigation}) => {
             left: 0,
             right: 0,
             zIndex: 0,
-            // justifyContent: 'center',
             alignItems: 'center',
             paddingTop: 30,
           }}>
@@ -100,13 +83,11 @@ const TeacherLogin = ({navigation}) => {
         </View>
         <View
           style={{
-            // display: 'flex',
             paddingHorizontal: 10,
             width: '100%',
             height: '100%',
             justifyContent: 'center',
             alignItems: 'center',
-            // paddingBottom: 90,
           }}>
           <View
             style={{
@@ -147,7 +128,7 @@ const TeacherLogin = ({navigation}) => {
                       fontWeight: 700,
                       color: COLORS.Primary,
                     }}>
-                    Sign in
+                    Login
                   </Text>
                 </View>
                 <Text
@@ -157,7 +138,7 @@ const TeacherLogin = ({navigation}) => {
                     color: COLORS.Primary1,
                   }}
                   onPress={() => navigation.navigate('TeacherRegister')}>
-                  Sign up
+                  Register
                 </Text>
               </View>
             </View>
@@ -215,6 +196,7 @@ const TeacherLogin = ({navigation}) => {
                   style={{
                     paddingVertical: 10,
                     color: COLORS.black,
+                    width: 'auto',
                   }}
                   placeholder="*******"
                   placeholderTextColor={COLORS.gray}
@@ -231,7 +213,7 @@ const TeacherLogin = ({navigation}) => {
                     }}
                     alt=""
                     style={{
-                      width: 20,
+                      width: '20%',
                       height: 20,
                       borderRadius: 25,
                     }}
@@ -306,7 +288,7 @@ const TeacherLogin = ({navigation}) => {
                     ...FONTS.h2,
                     fontSize: 25,
                   }}>
-                  Sign in
+                  Login
                 </Text>
 
                 <TouchableOpacity
