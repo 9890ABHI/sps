@@ -228,6 +228,8 @@ const TeacherRegister = ({navigation}) => {
                 <TextInput
                   style={{
                     paddingVertical: 10,
+                    width: '80%',
+                    color: COLORS.black,
                   }}
                   placeholder="****"
                   placeholderTextColor={COLORS.gray}

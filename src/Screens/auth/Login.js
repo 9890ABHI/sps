@@ -200,7 +200,7 @@ const Login = ({navigation}) => {
                     color: COLORS.black,
                   }}
                   placeholder="abc@mail.com"
-                  placeholderTextColor={COLORS.gray}
+                  // placeholderTextColor={COLORS.gray}
                   editable
                   onChangeText={text => handleInputChange('email', text)}
                   value={formData.email}
@@ -227,9 +227,12 @@ const Login = ({navigation}) => {
                   <TextInput
                     style={{
                       paddingVertical: 10,
+                      width: '80%',
+                      color: COLORS.black,
+                      // backgroundColor: COLORS.black,
                     }}
                     placeholder="*******"
-                    placeholderTextColor={COLORS.gray}
+                    // placeholderTextColor={COLORS.gray}
                     onChangeText={text => handleInputChange('password', text)}
                     value={formData.password}
                     secureTextEntry={showPass}

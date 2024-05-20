@@ -1110,6 +1110,7 @@ export const CourseDetails = ({route, navigation}) => {
                             paddingVertical: 10,
                             ...FONTS.body3,
                             color: COLORS.darkGray,
+                            fontWeight: 'bold',
                           }}>
                           Students Details :
                         </Text>
@@ -1118,7 +1119,7 @@ export const CourseDetails = ({route, navigation}) => {
                             display: 'flex',
                             gap: 10,
                           }}>
-                          {course.students.map(stud => (
+                          {course.students.map((stud, i) => (
                             <>
                               <View
                                 key={stud.id}
@@ -1132,7 +1133,7 @@ export const CourseDetails = ({route, navigation}) => {
                                     color: COLORS.black,
                                     textTransform: 'capitalize',
                                   }}>
-                                  {stud.name}
+                                  {i + 1} {stud.name}
                                 </Text>
                                 <Text>{/* {stud.email} */}</Text>
                                 <TouchableOpacity
@@ -1175,6 +1176,7 @@ export const CourseDetails = ({route, navigation}) => {
                                 paddingVertical: 10,
                                 ...FONTS.body3,
                                 color: COLORS.darkGray,
+                                fontWeight: 'bold',
                               }}>
                               Add new Students in course :
                             </Text>
@@ -1185,7 +1187,7 @@ export const CourseDetails = ({route, navigation}) => {
                             display: 'flex',
                             gap: 10,
                           }}>
-                          {student.map(stud => (
+                          {student.map((stud, i) => (
                             <>
                               <View
                                 key={stud.id}
@@ -1199,7 +1201,7 @@ export const CourseDetails = ({route, navigation}) => {
                                     color: COLORS.black,
                                     textTransform: 'capitalize',
                                   }}>
-                                  {stud.name}
+                                  {i + 1} {stud.name}
                                 </Text>
                                 <Text>{/* {stud.email} */}</Text>
                                 <TouchableOpacity
@@ -1388,21 +1390,29 @@ export const CreateNotifications = () => {
   };
 
   const createNotification = () => {
-    axios
-      .post(BASEURL + `api/notifications`, {
-        text: notificationText,
-        expiration: expiration || null,
-      })
-      .then(() => {
-        fetchNotifications();
-        setNotificationText('');
-        setExpiration('');
-      })
-      .catch(error => {
-        console.error('Error creating notification:', error);
-      });
+    if (notificationText != '')
+      axios
+        .post(BASEURL + `api/notifications`, {
+          text: notificationText,
+          expiration: expiration || null,
+        })
+        .then(() => {
+          fetchNotifications();
+          setNotificationText('');
+          setExpiration('');
+          setOpen(!open);
+        })
+        .catch(error => {
+          console.error('Error creating notification:', error);
+        });
+    else {
+      Alert.alert('Empty notifications !!!');
+    }
   };
 
+  console.log('====================================');
+  console.log(notifications);
+  console.log('====================================');
   return (
     <>
       <View
@@ -1444,20 +1454,33 @@ export const CreateNotifications = () => {
                     style={{
                       ...FONTS.h3,
                       textTransform: 'uppercase',
+                      // paddingBottom: 20,
                     }}>
                     Notification available : {notifications.length}
                   </Text>
                 </View>
               </>
             )}
-            <FlatList
-              data={notifications}
-              keyExtractor={(item, index) => index.toString()}
-              renderItem={({item}) => (
+            <View
+              style={{
+                paddingVertical: 10,
+              }}>
+              <Text
+                style={{
+                  ...FONTS.h3,
+                  textTransform: 'uppercase',
+                  paddingBottom: 10,
+                }}>
+                Notification available for only : 24 hours
+              </Text>
+            </View>
+            {notifications.map((item, i) => (
+              <>
                 <View
                   style={{
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
+                    flexDirection: 'row',
+                    // justifyContent: 's',
+                    alignItems: 'center',
                     marginBottom: 8,
                     borderWidth: 1,
                     borderColor: '#ccc',
@@ -1470,20 +1493,20 @@ export const CreateNotifications = () => {
                       ...FONTS.h2,
                       color: COLORS.black,
                     }}>
+                    {i + 1}
+                    {' '}
+                  </Text>
+
+                  <Text
+                    style={{
+                      ...FONTS.h2,
+                      color: COLORS.black,
+                    }}>
                     {item.text}
                   </Text>
-                  <Text>
-                    {item.expiration?.slice(0)}
-                    {/* {Date(item.expiration).slice(0, 15)} */}
-                  </Text>
-                  {/* <Text>
-                    {item.expiration
-                      ? `Expires on: ${item.expiration}`
-                      : 'No expiration'}
-                  </Text> */}
                 </View>
-              )}
-            />
+              </>
+            ))}
           </View>
         </>
       </View>
@@ -1565,6 +1588,7 @@ export const CreateNotifications = () => {
                       width: 20,
                       height: 20,
                       borderRadius: 0,
+                      tintColor: COLORS.darkGray,
                     }}
                   />
                 </TouchableOpacity>
@@ -1642,12 +1666,13 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   input: {
-    height: 40,
+    height: 60,
     borderColor: 'gray',
     borderWidth: 1,
     marginBottom: 8,
     paddingHorizontal: 8,
     borderRadius: 10,
+    ...FONTS.body2,
   },
   notificationItem: {},
 });

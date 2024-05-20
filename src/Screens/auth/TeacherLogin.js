@@ -195,8 +195,8 @@ const TeacherLogin = ({navigation}) => {
                 <TextInput
                   style={{
                     paddingVertical: 10,
+                    width: '80%',
                     color: COLORS.black,
-                    width: 'auto',
                   }}
                   placeholder="*******"
                   placeholderTextColor={COLORS.gray}

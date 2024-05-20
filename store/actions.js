@@ -38,8 +38,6 @@ export const signupRequest = () => ({type: SIGNUP_REQUEST});
 export const signupSuccess = user => ({type: SIGNUP_SUCCESS, user});
 export const signupFailure = error => ({type: SIGNUP_FAILURE, error});
 
-export const BASEURL = 'https://sps-backend-axyz28475.onrender.com/';
-
 export const login = credentials => async dispatch => {
   try {
     dispatch(loginRequest());
@@ -90,3 +88,7 @@ export const signup = userData => async dispatch => {
 // export const BASEURL ='https://api.render.com/deploy/srv-co4mpdf79t8c7394d80g?key=0WnDF8cK_zo';
 // export const BASEURL = 'https://sps-backend-x5fl.onrender.com';
 // export const BASEURL = 'https://timely-llama-00d951.netlify.app';
+// export const BASEURL = 'https://sps-backend-axyz28475.onrender.com/';
+// export const BASEURL = 'http://ec2-100-27-219-52.compute-1.amazonaws.com:3001/';
+export const BASEURL =
+  'http://ec2-54-163-200-241.compute-1.amazonaws.com:3001/';

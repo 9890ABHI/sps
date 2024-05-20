@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import {View, ActivityIndicator, StyleSheet} from 'react-native';
+import {View, ActivityIndicator, StyleSheet, Image} from 'react-native';
 import {COLORS} from '../Assets/Theme';
+import {Images} from '../Assets/Image';
 
 const LoadingScreen = ({navigation}) => {
   const [loading, setLoading] = useState(true);
@@ -16,6 +17,15 @@ const LoadingScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <Image
+        source={Images.imge2}
+        alt=""
+        style={{
+          width: 100,
+          height: 100,
+        }}
+      />
+
       <ActivityIndicator
         size="large"
         color={COLORS.green}
@@ -30,6 +40,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    gap: 60,
   },
 });
 

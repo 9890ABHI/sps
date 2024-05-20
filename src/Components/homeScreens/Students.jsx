@@ -6,6 +6,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {BASEURL, loginSuccess, logout} from '../../../store/actions';
 import axios from 'axios';
 import Notfound from './notfound';
+import {COLORS, FONTS} from '../../Assets/Theme';
+import {ImageSlider} from 'react-native-image-slider-banner';
 
 const Students = ({navigation}) => {
   const dispatch = useDispatch();
@@ -20,17 +22,57 @@ const Students = ({navigation}) => {
         style={{
           paddingHorizontal: 20,
           paddingVertical: 5,
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 100,
+          backgroundColor: COLORS.layout,
+          width: '100%',
         }}>
         <TextHeader title={'Student Portal System'} />
       </View>
-
-      {!user ? (
-        <>
-          <Text>loading.....</Text>
-        </>
-      ) : (
-        <>
-          <ScrollView>
+      <ScrollView>
+        {!user ? (
+          <>
+            <Text>loading.....</Text>
+          </>
+        ) : (
+          <>
+            <View
+              style={{
+                paddingTop: 20,
+              }}>
+              <ImageSlider
+                data={[
+                  {
+                    img: 'https://media.gettyimages.com/id/1059546642/vector/e-learning.jpg?s=612x612&w=0&k=20&c=r9vGsIBsml-8a49NATvd8W4mS5gJ1J5IQU9Ty95X3CE=',
+                  },
+                  {
+                    img: 'https://media.gettyimages.com/id/1136822845/vector/vector-set-of-design-templates-and-elements-for-online-education-in-trendy-linear-style.jpg?s=612x612&w=0&k=20&c=47nBZlcEafMWT3_lZdZAcxkfafmK80cAhrBcBiSAQDA=',
+                  },
+                  {
+                    img: 'https://media.gettyimages.com/id/1341159990/vector/online-education-related-vector-banner-design-concept-modern-line-style-with-icons.jpg?s=612x612&w=0&k=20&c=Q3REyIi0P7R251PqkrwzeAyD4DkZqT7CnK--DCcPNoE=',
+                  },
+                ]}
+                autoPlay={false}
+                onItemChanged={item => item}
+                closeIconColor="#fff"
+              />
+            </View>
+            <View
+              style={{
+                paddingHorizontal: 20,
+              }}>
+              <Text
+                style={{
+                  ...FONTS.h2,
+                  color: COLORS.black,
+                  fontWeight: 700,
+                }}>
+                Option to choose
+              </Text>
+            </View>
             <View
               style={{
                 display: 'flex',
@@ -42,7 +84,8 @@ const Students = ({navigation}) => {
                 alignItems: 'center',
                 // backgroundColor:"#000",
                 gap: 10,
-                paddingVertical: 20,
+                // paddingVertical: 20,
+                paddingBottom: 20,
               }}>
               <TouchableOpacity onPress={() => navigation.navigate('Student')}>
                 <Card
@@ -102,9 +145,9 @@ const Students = ({navigation}) => {
                 />
               </TouchableOpacity>
             </View>
-          </ScrollView>
-        </>
-      )}
+          </>
+        )}
+      </ScrollView>
     </>
   );
 };

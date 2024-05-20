@@ -252,6 +252,7 @@ const SignUp = ({navigation}) => {
               <TextInput
                 style={{
                   paddingVertical: 10,
+                  width: '80%',
                   color: COLORS.black,
                 }}
                 placeholder="*******"

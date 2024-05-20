@@ -12,6 +12,8 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import {BASEURL} from '../../store/actions';
 import {COLORS, FONTS} from '../Assets/Theme';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import Hrline from './Hrline';
 
 const DetailsWeek = ({
   route,
@@ -42,7 +44,7 @@ const DetailsWeek = ({
   };
 
   const [weeks, setWeeks] = useState(
-    course.weeks.length < 0
+    course.weeks.length <= 0
       ? [
           {
             weekNumber: 1,
@@ -99,22 +101,31 @@ const DetailsWeek = ({
           <View
             style={{
               display: 'flex',
-              flexDirection: 'row',
+              flexDirection: 'row-reverse',
               justifyContent: 'space-between',
               alignItems: 'center',
             }}>
-            {/* <Text
-              style={{
-                ...FONTS.h2,
-                color: COLORS.black,
-                textTransform: 'capitalize',
-              }}>
-              week wise course details
-            </Text> */}
+            {/* */}
+            <TouchableOpacity onPress={() => setOpen(prev => !prev)}>
+              <Image
+                source={{
+                  uri: 'https://cdn-icons-png.freepik.com/128/1828/1828665.png?ga=GA1.1.1634828664.1699686714&semt=ais',
+                }}
+                alt=""
+                style={{
+                  width: 15,
+                  height: 15,
+                  borderRadius: 0,
+                  tintColor: COLORS.gray,
+                  // transform: 'rotate(45deg)',
+                }}
+              />
+            </TouchableOpacity>
+            {/*  */}
             <TouchableOpacity
               style={{
                 paddingHorizontal: 10,
-                backgroundColor: 'blue',
+                backgroundColor: COLORS.green,
                 borderRadius: 10,
                 paddingVertical: 5,
                 display: 'flex',
@@ -129,8 +140,8 @@ const DetailsWeek = ({
                 }}
                 alt=""
                 style={{
-                  width: 12,
-                  height: 12,
+                  width: 14,
+                  height: 14,
                   borderRadius: 0,
                   tintColor: COLORS.white,
                   transform: 'rotate(45deg)',
@@ -144,21 +155,6 @@ const DetailsWeek = ({
                 }}>
                 Add Week
               </Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => setOpen(prev => !prev)}>
-              <Image
-                source={{
-                  uri: 'https://cdn-icons-png.freepik.com/128/1828/1828665.png?ga=GA1.1.1634828664.1699686714&semt=ais',
-                }}
-                alt=""
-                style={{
-                  width: 15,
-                  height: 15,
-                  borderRadius: 0,
-                  tintColor: COLORS.black,
-                  // transform: 'rotate(45deg)',
-                }}
-              />
             </TouchableOpacity>
           </View>
           <View
@@ -183,7 +179,7 @@ const DetailsWeek = ({
                       <Text
                         style={{
                           ...FONTS.body4,
-                          color: COLORS.red,
+                          color: '#cd5c5c',
                         }}>
                         Remove Week
                       </Text>
@@ -210,7 +206,8 @@ const DetailsWeek = ({
                         <TouchableOpacity
                           onPress={() => removeinfo(weekIndex, infoIndex)}
                           style={styles.removeButton}>
-                          <Image
+                          <Icon name={'delete'} size={30} color={'#cd5c5c'} />
+                          {/* <Image
                             source={{
                               uri: 'https://cdn-icons-png.freepik.com/128/1828/1828665.png?ga=GA1.1.1634828664.1699686714&semt=ais',
                             }}
@@ -222,7 +219,7 @@ const DetailsWeek = ({
                               // tintColor: COLORS.red,
                               // transform: 'rotate(45deg)',
                             }}
-                          />
+                          /> */}
                         </TouchableOpacity>
                       </View>
                     </>
@@ -230,11 +227,21 @@ const DetailsWeek = ({
                   <TouchableOpacity
                     onPress={() => addinfo(weekIndex)}
                     style={{
-                      width: '100%',
+                      // width: '100%',
+                      // display: 'flex',
+                      // justifyContent: 'center',
+                      // alignItems: 'center',
+                      // flexDirection: 'row',
+                      // gap: 10,
+                      // paddingTop: 10,
+                      paddingHorizontal: 10,
+                      backgroundColor: COLORS.green,
+                      borderRadius: 10,
+                      paddingVertical: 5,
                       display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
                       flexDirection: 'row',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                       gap: 10,
                     }}>
                     <Image
@@ -243,17 +250,17 @@ const DetailsWeek = ({
                       }}
                       alt=""
                       style={{
-                        width: 15,
-                        height: 15,
+                        width: 20,
+                        height: 20,
                         borderRadius: 0,
-                        tintColor: COLORS.green,
+                        tintColor: COLORS.layout,
                         // transform: 'rotate(45deg)',
                       }}
                     />
                     <Text
                       style={{
-                        ...FONTS.body4,
-                        color: COLORS.green,
+                        ...FONTS.h2,
+                        color: COLORS.layout,
                       }}>
                       add info
                     </Text>
@@ -291,15 +298,18 @@ export default DetailsWeek;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
   },
   weekContainer: {
-    marginBottom: 16,
+    marginBottom: 5,
+    backgroundColor: COLORS.layout,
+    padding: 10,
+    borderRadius: 10,
   },
   weekText: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 8,
+    color: COLORS.black,
   },
   input: {
     borderColor: 'gray',
