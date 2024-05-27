@@ -32,30 +32,53 @@ const Login = ({navigation}) => {
     });
   };
 
+  // const handleLogin = async () => {
+  //   if (formData.email === '' || formData.password === '') {
+  //     Alert.alert('Enter Email and Password', 'Some values are empty');
+  //   } else {
+  //     try {
+  //       const response = await dispatch(login(formData));
+  //       if (
+  //         (response && response.data === 'User dosent Exist') |
+  //         (User.error === undefined)
+  //       ) {
+  //         Alert.alert('User Not Found', 'Please check your email or password');
+  //       } else {
+  //         navigation.navigate('Home');
+  //       }
+  //     } catch (error) {
+  //       console.error('Error during login:', error);
+  //       Alert.alert('Login Failed', 'An error occurred during login');
+  //     }
+  //   }
+  // };
+
+  // ----------------------
+
   const handleLogin = async () => {
-    if (formData.email === '' || formData.password === '') {
+    if (!formData.email || !formData.password) {
       Alert.alert('Enter Email and Password', 'Some values are empty');
-    } else {
+      return;
+    }
+
+    try {
+      const response = await dispatch(login(formData));
       console.log('====================================');
-      console.log('formData', formData);
+      console.log(response.status);
       console.log('====================================');
-      try {
-        const response = await dispatch(login(formData));
-        if (
-          (response && response.data === 'User dosent Exist') ||
-          User.error === undefined
-        ) {
-          Alert.alert('User Not Found', 'Please check your email or password');
-        } else {
-          navigation.navigate('Home');
-        }
-      } catch (error) {
-        console.error('Error during login:', error);
-        Alert.alert('Login Failed', 'An error occurred during login');
+      if (response.status !== 201) {
+        // if (response.data === 'User dosent Exist' || 'null') {
+        Alert.alert('User Not Found', 'Please check your email or password');
+      } else {
+        navigation.navigate('Home');
       }
+    } catch (error) {
+      console.error('Error during login:', error);
+      Alert.alert('Login Failed', 'An error occurred during login');
     }
   };
 
+  // ----------------------
   const handleNotFound = error => {
     Alert.alert(error);
   };
@@ -64,9 +87,6 @@ const Login = ({navigation}) => {
       <>
         <View
           style={{
-            // display: 'flex',
-            // justifyContent: 'end',
-            // alignItems: 'center',
             height: '100%',
           }}>
           <View
@@ -200,7 +220,7 @@ const Login = ({navigation}) => {
                     color: COLORS.black,
                   }}
                   placeholder="abc@mail.com"
-                  // placeholderTextColor={COLORS.gray}
+                  placeholderTextColor={COLORS.gray}
                   editable
                   onChangeText={text => handleInputChange('email', text)}
                   value={formData.email}
@@ -232,7 +252,7 @@ const Login = ({navigation}) => {
                       // backgroundColor: COLORS.black,
                     }}
                     placeholder="*******"
-                    // placeholderTextColor={COLORS.gray}
+                    placeholderTextColor={COLORS.gary}
                     onChangeText={text => handleInputChange('password', text)}
                     value={formData.password}
                     secureTextEntry={showPass}

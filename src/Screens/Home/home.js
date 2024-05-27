@@ -15,19 +15,15 @@ export const Home = ({navigation}) => {
 
   return (
     <>
-      <View
-        style={{
-          backgroundColor: COLORS.layout,
-        }}>
-        {user.isLoading ? (
+      <View style={{backgroundColor: COLORS.layout}}>
+        {user.isLoading && <LoadingScreen />}
+
+        {user.error !== 'undefined' && (
           <>
-            <LoadingScreen />
+            {stud && <Students navigation={navigation} />}
+            {user.teacher && <Teacher navigation={navigation} />}
           </>
-        ) : undefined}
-
-        {stud ? <Students navigation={navigation} /> : null}
-
-        {user.teacher ? <Teacher navigation={navigation} /> : null}
+        )}
       </View>
     </>
   );

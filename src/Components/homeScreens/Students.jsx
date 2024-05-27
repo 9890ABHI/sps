@@ -90,7 +90,9 @@ const Students = ({navigation}) => {
               <TouchableOpacity onPress={() => navigation.navigate('Student')}>
                 <Card
                   title="Profile"
-                  img="https://img.freepik.com/free-vector/diary-concept-illustration_114360-3755.jpg?size=626&ext=jpg"
+                  // img="https://cdn.vectorstock.com/i/1000x1000/05/79/student-profile-line-icon-concept-vector-24720579.webp"
+                  img="https://cdn-icons-png.freepik.com/256/5509/5509537.png?ga=GA1.1.1634828664.1699686714&semt=ais_hybrid"
+                  // img="https://img.freepik.com/free-vector/diary-concept-illustration_114360-3755.jpg?size=626&ext=jpg"
                 />
               </TouchableOpacity>
 
@@ -105,7 +107,7 @@ const Students = ({navigation}) => {
                 onPress={() => navigation.navigate('TimeTable')}>
                 <Card
                   title="TimeTable"
-                  img="https://img.freepik.com/free-vector/diary-concept-illustration_114360-3755.jpg?size=626&ext=jpg"
+                  img="https://img.freepik.com/free-vector/schedule-concept-illustration_114360-1531.jpg?t=st=1716835855~exp=1716839455~hmac=1f2da6948ad6aa050ba69c27e8970ca6fc80befcdb04d0fa9609ae0ae7e244ba&w=826"
                 />
               </TouchableOpacity>
 
@@ -113,7 +115,7 @@ const Students = ({navigation}) => {
                 onPress={() => navigation.navigate('Notifications')}>
                 <Card
                   title="Announcements"
-                  img="https://img.freepik.com/free-vector/diary-concept-illustration_114360-3755.jpg?size=626&ext=jpg"
+                  img="https://img.freepik.com/premium-vector/notice-free-vector_734448-5.jpg?w=826"
                 />
               </TouchableOpacity>
 
@@ -121,7 +123,7 @@ const Students = ({navigation}) => {
                 onPress={() => navigation.navigate('StudentSupport')}>
                 <Card
                   title="Student Support"
-                  img="https://img.freepik.com/free-vector/diary-concept-illustration_114360-3755.jpg?size=626&ext=jpg"
+                  img="https://img.freepik.com/free-vector/customer-service-concept-illustration_114360-22120.jpg?t=st=1716835953~exp=1716839553~hmac=80d40917cbafe323e303d259511b431ad31b99fbf976959074083e1e71064065&w=826"
                 />
               </TouchableOpacity>
 
@@ -129,19 +131,21 @@ const Students = ({navigation}) => {
                 onPress={() => navigation.navigate('Calculator')}>
                 <Card
                   title="Calculator"
-                  img="https://img.freepik.com/free-vector/diary-concept-illustration_114360-3755.jpg?size=626&ext=jpg"
+                  img="https://play-lh.googleusercontent.com/OiFA7RIjk3B6ibeRIUO2aSu_Z65VabTRwkqBHF9AuheVhr9H4RRmcWLxIHV2JWy94vM=w240-h480-rw"
+                  // img="https://img.freepik.com/free-vector/diary-concept-illustration_114360-3755.jpg?size=626&ext=jpg"
                 />
               </TouchableOpacity>
               <TouchableOpacity onPress={() => navigation.navigate('Lectures')}>
                 <Card
                   title="lectures"
-                  img="https://img.freepik.com/free-vector/diary-concept-illustration_114360-3755.jpg?size=626&ext=jpg"
+                  img="https://img.freepik.com/free-vector/public-talk-concept-illustration_114360-8970.jpg?t=st=1716836147~exp=1716839747~hmac=af53f4ead9131038ae2a4f78f449fe4e362300e064b5eb9b7550accfc37d85ac&w=1380"
                 />
               </TouchableOpacity>
               <TouchableOpacity onPress={handleLogOut}>
                 <Card
                   title="LogOut"
-                  img="https://img.freepik.com/free-vector/diary-concept-illustration_114360-3755.jpg?size=626&ext=jpg"
+                  // img="https://cdn-icons-png.flaticon.com/512/4400/4400629.png"
+                  img="https://img.freepik.com/premium-vector/door-silhouette-open-door-sign-exit-with-arrow-symbol_532867-457.jpg?w=826"
                 />
               </TouchableOpacity>
             </View>

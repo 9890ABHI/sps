@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {View, ActivityIndicator, StyleSheet, Image} from 'react-native';
+import {View, ActivityIndicator, StyleSheet, Image, Text} from 'react-native';
 import {COLORS} from '../Assets/Theme';
 import {Images} from '../Assets/Image';
+import {TextHeader} from './Header';
 
 const LoadingScreen = ({navigation}) => {
   const [loading, setLoading] = useState(true);
@@ -9,29 +10,50 @@ const LoadingScreen = ({navigation}) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-      navigation.navigate('Login'); // Navigate to your main screen
-    }, 5000); // 5000 milliseconds = 5 seconds
+      navigation.navigate('Login');
+    }, 2500);
 
     return () => clearTimeout(timer);
   }, [navigation]);
 
   return (
-    <View style={styles.container}>
-      <Image
-        source={Images.imge2}
-        alt=""
+    <>
+      <View
         style={{
-          width: 100,
-          height: 100,
-        }}
-      />
+          flex: 1,
+          justifyContent: 'space-between',
+          flexDirection: 'column',
+          alignItems: 'center',
+          paddingBottom: 30,
+        }}>
+        <View style={styles.container}>
+          <Image
+            source={Images.imge1}
+            alt=""
+            style={{
+              width: 100,
+              height: 100,
+            }}
+          />
 
-      <ActivityIndicator
-        size="large"
-        color={COLORS.green}
-        animating={loading}
-      />
-    </View>
+          <ActivityIndicator
+            size="large"
+            color={COLORS.green}
+            animating={loading}
+          />
+        </View>
+        <View
+          style={{
+            display: 'flex',
+            width: '100%',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}>
+          <TextHeader title={'SPS'} />
+          <Text>STUDENT PROFILE SYSTEM</Text>
+        </View>
+      </View>
+    </>
   );
 };
 
@@ -45,59 +67,3 @@ const styles = StyleSheet.create({
 });
 
 export default LoadingScreen;
-// import React, {useState, useEffect} from 'react';
-// import {View, StyleSheet, Animated, Easing, Image} from 'react-native';
-
-// const LoadingScreen = ({navigation}) => {
-//   const [spinValue] = useState(new Animated.Value(0));
-
-//   useEffect(() => {
-//     Animated.loop(
-//       Animated.timing(spinValue, {
-//         toValue: 1,
-//         duration: 3000,
-//         easing: Easing.linear,
-//         useNativeDriver: true,
-//       }),
-//     ).start();
-//     setTimeout(() => {
-//       //   navigation.navigate('Login');
-//     }, 9000);
-//   }, [spinValue, navigation]);
-
-//   const spin = spinValue.interpolate({
-//     inputRange: [0, 1],
-//     outputRange: ['0deg', '360deg'],
-//   });
-
-//   return (
-//     <View style={styles.container}>
-//       <Image
-//         source={require('../Assets/Book.gif')}
-//         style={{
-//           width: 100,
-//           height: 100,
-//         }}
-//       />
-//       <Animated.Image
-//         style={[styles.studentImage, {transform: [{rotate: spin}]}]}
-//         source={require('../Assets/Book.gif')}
-//       />
-//     </View>
-//   );
-// };
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     backgroundColor: '#ffffff',
-//   },
-//   studentImage: {
-//     width: 150,
-//     height: 150,
-//   },
-// });
-
-// export default LoadingScreen;

@@ -38,21 +38,42 @@ export const signupRequest = () => ({type: SIGNUP_REQUEST});
 export const signupSuccess = user => ({type: SIGNUP_SUCCESS, user});
 export const signupFailure = error => ({type: SIGNUP_FAILURE, error});
 
+//  ----------------
+
+// export const login = credentials => async dispatch => {
+//   try {
+//     dispatch(loginRequest());
+//     await axios
+//       .post(BASEURL + 'login', credentials)
+//       .then(res => {
+//         res.data.data == 'User dosent Exist'
+//           ? dispatch(loginFailure(error.data))
+//           : dispatch(loginSuccess(res.data.data));
+//       })
+//       .catch(error => dispatch(loginFailure(error.data)));
+//   } catch (error) {
+//     dispatch(loginFailure(error.data));
+//   }
+// };
+
+//  ----------------
+
 export const login = credentials => async dispatch => {
   try {
     dispatch(loginRequest());
-    await axios
-      .post(BASEURL + 'login', credentials)
-      .then(res => {
-        res.data.data == 'User dosent Exist'
-          ? dispatch(loginFailure(error.data))
-          : dispatch(loginSuccess(res.data.data));
-      })
-      .catch(error => dispatch(loginFailure(error.data)));
+    const response = await axios.post(BASEURL + 'login', credentials);
+    dispatch(loginSuccess(response.data.data));
+    console.log('====================================');
+    console.log(response);
+    console.log('====================================');
+    return response; // Return the response for further processing if needed
   } catch (error) {
-    dispatch(loginFailure(error.data));
+    dispatch(loginFailure(error));
+    throw error; // Re-throw the error for the calling function to handle
   }
 };
+
+//  ----------------
 export const teacherlogin = credentials => async dispatch => {
   try {
     dispatch(teacherLoginRequest());
@@ -90,5 +111,8 @@ export const signup = userData => async dispatch => {
 // export const BASEURL = 'https://timely-llama-00d951.netlify.app';
 // export const BASEURL = 'https://sps-backend-axyz28475.onrender.com/';
 // export const BASEURL = 'http://ec2-100-27-219-52.compute-1.amazonaws.com:3001/';
-export const BASEURL =
-  'http://ec2-54-163-200-241.compute-1.amazonaws.com:3001/';
+// export const BASEURL = 'https://ec2-34-203-248-90.compute-1.amazonaws.com:3001/';
+// export const BASEURL = 'https://ec2-54-226-152-188.compute-1.amazonaws.com:3001/';
+export const BASEURL = 'https://sps-8ot7.onrender.com/';
+
+// export const BASEURL = 'http://192.168.105.170:3001/';

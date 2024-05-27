@@ -20,6 +20,7 @@ import {TextHeader} from '../../Components/Header';
 import axios from 'axios';
 import {BASEURL} from '../../../store/actions';
 import {CourseStudent} from '../../Components/Course';
+
 export const Student = ({navigation}) => {
   const [edit, setEdit] = useState(false);
   const user = useSelector(state => state.auth.user);
@@ -974,7 +975,6 @@ export const Lectures = ({navigation}) => {
       image_link: 'https://img.youtube.com/vi/UQeyU0YcPKY/maxresdefault.jpg',
       youtube_link: 'https://youtu.be/UQeyU0YcPKY?si=IgBrXFk-rH8JyRKw',
     },
-
     {
       id: 2,
       name: 'What is HPC ?',
@@ -1025,7 +1025,7 @@ export const Lectures = ({navigation}) => {
                       backgroundColor: COLORS.white,
                       borderRadius: 20,
                     }}
-                    onPress={() => Linking.openURL(item.youtube_link)}>
+                    onPress={Linking.openURL(item.youtube_link)}>
                     <View
                       style={{
                         padding: 0,
