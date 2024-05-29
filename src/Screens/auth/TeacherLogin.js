@@ -32,23 +32,48 @@ const TeacherLogin = ({navigation}) => {
     });
   };
 
+  // const handleLogin = async () => {
+  //   if (formData.email === '' || formData.password === '') {
+  //     Alert.alert('Enter Email and Password', 'Some values are empty');
+  //   } else {
+  //     try {
+  //       const response = await dispatch(teacherlogin(formData));
+  //       if (response === 'User dosent Exist' || user.error === undefined) {
+  //         Alert.alert('User Not Found', 'Please check your email or password');
+  //       } else {
+  //         navigation.navigate('Home');
+  //       }
+  //     } catch (error) {
+  //       console.error('Error during login:', error);
+  //       Alert.alert('Login Failed', 'An error occurred during login');
+  //     }
+  //   }
+  // };
+
+  // --------------------------------------------
   const handleLogin = async () => {
-    if (formData.email === '' || formData.password === '') {
+    if (!formData.email || !formData.password) {
       Alert.alert('Enter Email and Password', 'Some values are empty');
-    } else {
-      try {
-        const response = await dispatch(teacherlogin(formData));
-        if (response === 'User dosent Exist' || user.error === undefined) {
-          Alert.alert('User Not Found', 'Please check your email or password');
-        } else {
-          navigation.navigate('Home');
-        }
-      } catch (error) {
-        console.error('Error during login:', error);
-        Alert.alert('Login Failed', 'An error occurred during login');
+      return;
+    }
+
+    try {
+      const response = await dispatch(teacherlogin(formData));
+      console.log('====================================');
+      console.log(response.status);
+      console.log('====================================');
+      if (response.status !== 201) {
+        // if (response.data === 'User dosent Exist' || 'null') {
+        Alert.alert('Login Not Found', 'Please check your email or password');
+      } else {
+        navigation.navigate('Home');
       }
+    } catch (error) {
+      console.error('Error during login:', error);
+      Alert.alert('Login Failed', 'An error occurred during login');
     }
   };
+  // --------------------------------------------
   const handleNotFound = error => {
     Alert.alert(error);
   };

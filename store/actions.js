@@ -74,20 +74,38 @@ export const login = credentials => async dispatch => {
 };
 
 //  ----------------
+// export const teacherlogin = credentials => async dispatch => {
+//   try {
+//     dispatch(teacherLoginRequest());
+//     await axios
+//       .post(BASEURL + 'loginteacher', credentials)
+//       .then(res => {
+//         console.log('res', res.data.data);
+//         dispatch(teacherLoginSuccess(res.data.data));
+//       })
+//       .catch(error => dispatch(teacherLoginFailure(error)));
+//   } catch (error) {
+//     dispatch(teacherLoginFailure(error));
+//   }
+// };
+//  ----------------
+
 export const teacherlogin = credentials => async dispatch => {
   try {
     dispatch(teacherLoginRequest());
-    await axios
-      .post(BASEURL + 'loginteacher', credentials)
-      .then(res => {
-        console.log('res', res.data.data);
-        dispatch(teacherLoginSuccess(res.data.data));
-      })
-      .catch(error => dispatch(teacherLoginFailure(error)));
+    const response = await axios.post(BASEURL + 'loginteacher', credentials);
+    dispatch(teacherLoginSuccess(response.data.data));
+    console.log('====================================');
+    console.log(response);
+    console.log('====================================');
+    return response; // Return the response for further processing if needed
   } catch (error) {
     dispatch(teacherLoginFailure(error));
+    throw error; // Re-throw the error for the calling function to handle
   }
 };
+
+//  ----------------
 
 export const logoutUser = () => dispatch => {
   dispatch(logout());
