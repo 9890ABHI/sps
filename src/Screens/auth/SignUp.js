@@ -35,7 +35,7 @@ const SignUp = ({navigation}) => {
             navigation.navigate('Login');
           }
         })
-        .catch(e => Alert.alert('Registration unsuccesfull'));
+        .catch(e => console.log(e), Alert.alert('Registration unsuccesfull'));
     }
   };
   return (

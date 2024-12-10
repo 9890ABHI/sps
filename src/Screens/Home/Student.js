@@ -60,7 +60,11 @@ export const Student = ({navigation}) => {
   };
 
   return (
-    <View>
+    <View
+      style={{
+        backgroundColor: COLORS.white,
+        height: '100%',
+      }}>
       <View
         style={{
           paddingHorizontal: 20,
@@ -68,6 +72,8 @@ export const Student = ({navigation}) => {
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
+          backgroundColor: COLORS.layout,
+          paddingVertical: 10,
         }}>
         <TextHeader title={'Profile'} />
         <TouchableOpacity onPress={() => setEdit(!edit)}>
@@ -98,12 +104,14 @@ export const Student = ({navigation}) => {
           </Text>
           <TextInput
             style={{
-              borderColor: 'gray',
+              borderColor: !edit ? COLORS.black : COLORS.Primary,
               width: '100%',
               borderWidth: 1,
               borderRadius: 10,
               padding: 10,
               ...FONTS.h3,
+              color: edit ? COLORS.black : COLORS.Primary,
+              textTransform: 'capitalize',
             }}
             // placeholder='abc xyz'
             editable={edit ? true : false}
@@ -120,12 +128,13 @@ export const Student = ({navigation}) => {
           </Text>
           <TextInput
             style={{
-              borderColor: 'gray',
+              borderColor: !edit ? COLORS.black : COLORS.Primary,
               width: '100%',
               borderWidth: 1,
               borderRadius: 10,
               padding: 10,
               ...FONTS.h3,
+              color: edit ? COLORS.black : COLORS.Primary,
             }}
             // placeholder='
             editable={edit ? true : false}
@@ -144,12 +153,13 @@ export const Student = ({navigation}) => {
           </Text>
           <TextInput
             style={{
-              borderColor: 'gray',
+              borderColor: !edit ? COLORS.black : COLORS.Primary,
               width: '100%',
               borderWidth: 1,
               borderRadius: 10,
               padding: 10,
               ...FONTS.h3,
+              color: edit ? COLORS.black : COLORS.Primary,
             }}
             // placeholder='
             editable={false}
@@ -444,8 +454,14 @@ export const TimeTable = ({navigation}) => {
     <>
       <View
         style={{
-          paddingHorizontal: 20,
+          paddingHorizontal: 10,
           paddingVertical: 10,
+          marginHorizontal: 10,
+          backgroundColor: COLORS.white,
+          borderRadius: 10,
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
         }}>
         <Text
           style={{
@@ -1018,14 +1034,16 @@ export const Lectures = ({navigation}) => {
                   style={{
                     paddingVertical: 10,
                   }}>
-                  <View
+                  <TouchableOpacity
                     style={{
                       paddingHorizontal: 10,
                       paddingVertical: 10,
                       backgroundColor: COLORS.white,
                       borderRadius: 20,
                     }}
-                    onPress={Linking.openURL(item.youtube_link)}>
+                    // onPress={() => Linking.openURL(item.youtube_link)}
+                    // ={() => Linking.openURL(item.youtube_link)}
+                  >
                     <View
                       style={{
                         padding: 0,
@@ -1083,7 +1101,7 @@ export const Lectures = ({navigation}) => {
                       }}>
                       {item.name}
                     </Text>
-                  </View>
+                  </TouchableOpacity>
                 </View>
               )}
             />

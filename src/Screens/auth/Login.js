@@ -17,9 +17,6 @@ const Login = ({navigation}) => {
   const dispatch = useDispatch();
   const User = useSelector(state => state.auth);
   const [showPass, setShowPass] = useState(true);
-  // console.log('==== User Auth === null or not ====');
-  // console.log(user);
-  // console.log('====================================');
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -31,29 +28,6 @@ const Login = ({navigation}) => {
       [name]: value,
     });
   };
-
-  // const handleLogin = async () => {
-  //   if (formData.email === '' || formData.password === '') {
-  //     Alert.alert('Enter Email and Password', 'Some values are empty');
-  //   } else {
-  //     try {
-  //       const response = await dispatch(login(formData));
-  //       if (
-  //         (response && response.data === 'User dosent Exist') |
-  //         (User.error === undefined)
-  //       ) {
-  //         Alert.alert('User Not Found', 'Please check your email or password');
-  //       } else {
-  //         navigation.navigate('Home');
-  //       }
-  //     } catch (error) {
-  //       console.error('Error during login:', error);
-  //       Alert.alert('Login Failed', 'An error occurred during login');
-  //     }
-  //   }
-  // };
-
-  // ----------------------
 
   const handleLogin = async () => {
     if (!formData.email || !formData.password) {
@@ -93,7 +67,7 @@ const Login = ({navigation}) => {
             style={{
               position: 'absolute',
               width: '100%',
-              height: '45%',
+              height: '40%',
               backgroundColor: COLORS.green,
               top: 0,
               left: 0,
@@ -249,10 +223,9 @@ const Login = ({navigation}) => {
                       paddingVertical: 10,
                       width: '80%',
                       color: COLORS.black,
-                      // backgroundColor: COLORS.black,
                     }}
                     placeholder="*******"
-                    placeholderTextColor={COLORS.gary}
+                    placeholderTextColor={COLORS.gray}
                     onChangeText={text => handleInputChange('password', text)}
                     value={formData.password}
                     secureTextEntry={showPass}

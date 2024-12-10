@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
+import {View, Text, TouchableOpacity, ScrollView, Image} from 'react-native';
 import React, {useEffect, useMemo, useState} from 'react';
 import Card from '../Card';
 import {TextHeader} from '../Header';
@@ -8,6 +8,7 @@ import axios from 'axios';
 import Notfound from './notfound';
 import {COLORS, FONTS} from '../../Assets/Theme';
 import {ImageSlider} from 'react-native-image-slider-banner';
+import {StudentSideMenu} from '../SideMenu';
 
 const Students = ({navigation}) => {
   const dispatch = useDispatch();
@@ -16,23 +17,124 @@ const Students = ({navigation}) => {
     dispatch(logout());
     navigation.navigate('Login');
   };
+
+  const [valu, setValu] = useState(true);
+  const OnClickButton = () => {
+    setValu(!valu);
+  };
+
   return (
     <>
       <View
         style={{
           paddingHorizontal: 20,
           paddingVertical: 5,
-          position: 'absolute',
+          // position: 'absolute',
           top: 0,
           left: 0,
           right: 0,
           zIndex: 100,
           backgroundColor: COLORS.layout,
           width: '100%',
+          height: 'auto',
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
         }}>
         <TextHeader title={'Student Portal System'} />
+        <View>
+          <>
+            {valu ? (
+              <>
+                <TouchableOpacity onPress={OnClickButton}>
+                  <View>
+                    <Image
+                      source={{
+                        uri: 'https://cdn2.iconfinder.com/data/icons/css-vol-2/24/menu-right-256.png',
+                      }}
+                      style={{
+                        width: 30,
+                        height: 30,
+                        borderRadius: 20,
+                      }}
+                      // resizeMode="contain"
+                    />
+                  </View>
+                </TouchableOpacity>
+              </>
+            ) : (
+              <>
+                {/* <TouchableOpacity onPress={OnClickButton}>
+                  <View>
+                    <Image
+                      source={{
+                        uri: 'https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-close-round-256.png',
+                      }}
+                      style={{
+                        width: 30,
+                        height: 30,
+                        borderRadius: 20,
+                      }}
+                      // resizeMode="contain"
+                    />
+                  </View>
+                </TouchableOpacity> */}
+              </>
+            )}
+          </>
+        </View>
       </View>
-      <ScrollView>
+
+      {/* side menu */}
+      <>
+        {!valu ? (
+          <>
+            <View
+              style={{
+                display: 'flex',
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                backgroundColor: '#f2f2f2',
+                zIndex: 10000,
+              }}>
+              <>
+                <TouchableOpacity
+                  onPress={OnClickButton}
+                  style={{
+                    // padding: 20,
+                    position: 'absolute',
+                    right: 20,
+                    top: 20,
+                  }}>
+                  <View>
+                    <Image
+                      source={{
+                        uri: 'https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-close-round-256.png',
+                      }}
+                      style={{
+                        width: 30,
+                        height: 30,
+                        borderRadius: 20,
+                      }}
+                      // resizeMode="contain"
+                    />
+                  </View>
+                </TouchableOpacity>
+              </>
+              <>
+                <StudentSideMenu navigation={navigation} user={user} />
+              </>
+            </View>
+          </>
+        ) : null}
+      </>
+      {/*  */}
+      <ScrollView
+        style={{
+          backgroundColor: COLORS.lightGray1,
+        }}>
         {!user ? (
           <>
             <Text>loading.....</Text>
@@ -41,28 +143,43 @@ const Students = ({navigation}) => {
           <>
             <View
               style={{
-                paddingTop: 20,
+                // paddingTop: 20,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '17%',
               }}>
               <ImageSlider
                 data={[
                   {
-                    img: 'https://media.gettyimages.com/id/1059546642/vector/e-learning.jpg?s=612x612&w=0&k=20&c=r9vGsIBsml-8a49NATvd8W4mS5gJ1J5IQU9Ty95X3CE=',
+                    img: 'https://img.freepik.com/premium-vector/landing-page-web-template-education_101434-276.jpg?w=1060',
                   },
+                  // {
+                  //   img: 'https://media.gettyimages.com/id/1059546642/vector/e-learning.jpg?s=612x612&w=0&k=20&c=r9vGsIBsml-8a49NATvd8W4mS5gJ1J5IQU9Ty95X3CE=',
+                  // },
                   {
-                    img: 'https://media.gettyimages.com/id/1136822845/vector/vector-set-of-design-templates-and-elements-for-online-education-in-trendy-linear-style.jpg?s=612x612&w=0&k=20&c=47nBZlcEafMWT3_lZdZAcxkfafmK80cAhrBcBiSAQDA=',
+                    img: 'https://img.freepik.com/free-vector/gradient-background-international-day-education_23-2151016699.jpg',
                   },
+                  // {
+                  //   img: 'https://media.gettyimages.com/id/1136822845/vector/vector-set-of-design-templates-and-elements-for-online-education-in-trendy-linear-style.jpg?s=612x612&w=0&k=20&c=47nBZlcEafMWT3_lZdZAcxkfafmK80cAhrBcBiSAQDA=',
+                  // },
                   {
                     img: 'https://media.gettyimages.com/id/1341159990/vector/online-education-related-vector-banner-design-concept-modern-line-style-with-icons.jpg?s=612x612&w=0&k=20&c=Q3REyIi0P7R251PqkrwzeAyD4DkZqT7CnK--DCcPNoE=',
                   },
                 ]}
-                autoPlay={false}
+                autoPlay={true}
+                timer={3000}
                 onItemChanged={item => item}
                 closeIconColor="#fff"
+                caroselImageStyle={{
+                  resizeMode: 'cover',
+                }}
               />
             </View>
             <View
               style={{
                 paddingHorizontal: 20,
+                paddingBottom: 10,
               }}>
               <Text
                 style={{
@@ -85,7 +202,7 @@ const Students = ({navigation}) => {
                 // backgroundColor:"#000",
                 gap: 10,
                 // paddingVertical: 20,
-                paddingBottom: 20,
+                paddingBottom: 50,
               }}>
               <TouchableOpacity onPress={() => navigation.navigate('Student')}>
                 <Card

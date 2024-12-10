@@ -1,50 +1,177 @@
-import {View, Text, TouchableOpacity, ScrollView, Button} from 'react-native';
-import React, {useEffect} from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  Button,
+  Image,
+} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import Card from '../Card';
 import {TextHeader} from '../Header';
 import {useDispatch, useSelector} from 'react-redux';
-import {BASEURL, logout, teacherLoginSuccess} from '../../../store/actions';
+import {
+  BASEURL,
+  fetchNotifications,
+  logout,
+  teacherLoginSuccess,
+} from '../../../store/actions';
 import axios from 'axios';
+import {COLORS, FONTS} from '../../Assets/Theme';
+import {StudentSideMenu} from '../SideMenu';
+import {PopUp} from '../popup';
+import {NotificationCard} from '../notificationCard';
 
 const Teacher = ({navigation}) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.auth);
-  // useEffect(() => {
-  //   const fetchTeacherDetails = async () => {
-  //     try {
-  //       // const teacherEmail = teacher.email
-  //       const response = await axios.get(`${BASEURL}api/teacher/${user.email}`);
-  //       // const teacher = response.data; // Assuming your API returns the teacher ID
-  //       // console.log('====================================');
-  //       // console.log('teacher',teacher);
-  //       // console.log('====================================');
-  //       //  setTeacher(response.data)
-  //       // You can dispatch an action to update the Redux state with teacher details or do anything else with the data
-  //       dispatch(teacherLoginSuccess(response.data));
-  //     } catch (error) {
-  //       console.log('Error fetching teacher details:', error.message);
-  //     }
-  //   };
-  //   fetchTeacherDetails();
-  // }, []);
+
   const handleLogOut = () => {
     dispatch(logout());
     navigation.navigate('TeacherLogin');
   };
+
+  const [valu, setValu] = useState(true);
+  const OnClickButton = () => {
+    setValu(!valu);
+  };
+
   return (
     <>
+      <View
+        style={{
+          paddingHorizontal: 20,
+          paddingVertical: 5,
+          // position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 100,
+          backgroundColor: COLORS.layout,
+          width: '100%',
+          height: 'auto',
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+        <TextHeader title={'Student Portal System'} />
+        <View>
+          <>
+            {valu ? (
+              <>
+                <TouchableOpacity onPress={OnClickButton}>
+                  <View>
+                    <Image
+                      source={{
+                        uri: 'https://cdn2.iconfinder.com/data/icons/css-vol-2/24/menu-right-256.png',
+                      }}
+                      style={{
+                        width: 30,
+                        height: 30,
+                        borderRadius: 20,
+                      }}
+                      // resizeMode="contain"
+                    />
+                  </View>
+                </TouchableOpacity>
+              </>
+            ) : (
+              <>
+                {/* <TouchableOpacity onPress={OnClickButton}>
+                  <View>
+                    <Image
+                      source={{
+                        uri: 'https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-close-round-256.png',
+                      }}
+                      style={{
+                        width: 30,
+                        height: 30,
+                        borderRadius: 20,
+                      }}
+                      // resizeMode="contain"
+                    />
+                  </View>
+                </TouchableOpacity> */}
+              </>
+            )}
+          </>
+        </View>
+      </View>
+
+      {/* side menu */}
+      <>
+        {!valu ? (
+          <>
+            <View
+              style={{
+                display: 'flex',
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                backgroundColor: '#f2f2f2',
+                zIndex: 100,
+              }}>
+              <>
+                <TouchableOpacity
+                  onPress={OnClickButton}
+                  style={{
+                    // padding: 20,
+                    position: 'absolute',
+                    right: 20,
+                    top: 20,
+                  }}>
+                  <View>
+                    <Image
+                      source={{
+                        uri: 'https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-close-round-256.png',
+                      }}
+                      style={{
+                        width: 30,
+                        height: 30,
+                        borderRadius: 20,
+                      }}
+                      // resizeMode="contain"
+                    />
+                  </View>
+                </TouchableOpacity>
+              </>
+              <>
+                <StudentSideMenu navigation={navigation} user={user} />
+              </>
+            </View>
+          </>
+        ) : null}
+      </>
+      {/*  */}
+
       {!user ? (
         <>
           <Text>loading....</Text>
         </>
       ) : (
         <>
-          <ScrollView>
+          <ScrollView
+            style={{
+              backgroundColor: COLORS.lightGray1,
+              height: '100%',
+            }}>
             <View
               style={{
-                paddingHorizontal: 20,
+                // paddingHorizontal: 20,
+                paddingVertical: 15,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
               }}>
-              <TextHeader title={'Teacher Portal System'} />
+              <Text
+                style={{
+                  ...FONTS.h2,
+                  color: COLORS.black,
+                  fontWeight: 700,
+                }}>
+                Teacher only options
+              </Text>
             </View>
             <View
               style={{

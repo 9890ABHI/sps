@@ -184,14 +184,14 @@ export const Teacher = ({navigation}) => {
           </Text>
           <TextInput
             style={{
-              borderColor: edit ? COLORS.Primary1 : 'gray',
+              borderColor: edit ? COLORS.Primary : 'gray',
               width: '100%',
               borderWidth: 1,
               borderRadius: 10,
               padding: 10,
               ...FONTS.h3,
-              textTransform: 'capitalize',
               color: edit ? COLORS.Primary : 'gray',
+              textTransform: 'capitalize',
             }}
             // placeholder='abc xyz'
             editable={edit ? true : false}
@@ -658,6 +658,7 @@ export const CreateCourseScreen = ({navigation}) => {
           <Text
             style={{
               ...FONTS.h3,
+              color: COLORS.gray,
             }}>
             Select Techers:
           </Text>
@@ -692,6 +693,7 @@ export const CreateCourseScreen = ({navigation}) => {
                   paddingVertical: 5,
                   paddingHorizontal: 10,
                   borderRadius: 10,
+                  marginVertical: 2,
                 }}>
                 <Text>{i + 1}</Text>
                 <Text
@@ -741,7 +743,13 @@ export const CreateCourseScreen = ({navigation}) => {
             ))}
           </ScrollView>
           {/* Display the list of students */}
-          <Text>Select Students:</Text>
+          <Text
+            style={{
+              ...FONTS.h3,
+              color: COLORS.gray,
+            }}>
+            Select Students:
+          </Text>
 
           <ScrollView
             style={{
@@ -762,6 +770,7 @@ export const CreateCourseScreen = ({navigation}) => {
                   paddingHorizontal: 10,
 
                   borderRadius: 10,
+                  marginVertical: 2,
                 }}>
                 <Text>{i + 1}</Text>
                 <Text
@@ -1369,6 +1378,7 @@ export const AttendanceScreen = () => {
   );
 };
 export const CreateNotifications = () => {
+  const teacher = useSelector(state => state.auth.teacher);
   const [notifications, setNotifications] = useState([]);
   const [notificationText, setNotificationText] = useState('');
   const [expiration, setExpiration] = useState('');
@@ -1395,6 +1405,7 @@ export const CreateNotifications = () => {
         .post(BASEURL + `api/notifications`, {
           text: notificationText,
           expiration: expiration || null,
+          user: teacher.name,
         })
         .then(() => {
           fetchNotifications();
@@ -1439,41 +1450,16 @@ export const CreateNotifications = () => {
                     style={{
                       ...FONTS.h3,
                       textTransform: 'uppercase',
+                      color: COLORS.black,
                     }}>
                     their is no new notification....
                   </Text>
                 </View>
               </>
             ) : (
-              <>
-                <View
-                  style={{
-                    paddingVertical: 10,
-                  }}>
-                  <Text
-                    style={{
-                      ...FONTS.h3,
-                      textTransform: 'uppercase',
-                      // paddingBottom: 20,
-                    }}>
-                    Notification available : {notifications.length}
-                  </Text>
-                </View>
-              </>
+              <></>
             )}
-            <View
-              style={{
-                paddingVertical: 10,
-              }}>
-              <Text
-                style={{
-                  ...FONTS.h3,
-                  textTransform: 'uppercase',
-                  paddingBottom: 10,
-                }}>
-                Notification available for only : 24 hours
-              </Text>
-            </View>
+
             {notifications.map((item, i) => (
               <>
                 <View
@@ -1487,7 +1473,8 @@ export const CreateNotifications = () => {
                     padding: 14,
                     borderRadius: 8,
                     paddingHorizontal: 15,
-                  }}>
+                  }}
+                  key={item._id}>
                   <Text
                     style={{
                       ...FONTS.h2,
@@ -1601,6 +1588,7 @@ export const CreateNotifications = () => {
                     multiline
                     numberOfLines={4}
                     placeholder="Enter notification text"
+                    cursorColor={COLORS.black}
                     value={notificationText}
                     onChangeText={text => setNotificationText(text)}
                   />
@@ -1673,6 +1661,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     borderRadius: 10,
     ...FONTS.body2,
+    color: COLORS.darkGray,
   },
   notificationItem: {},
 });
